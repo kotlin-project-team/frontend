@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">dongamboard</string>
+    <string name="somsom_s_ta">SomSom Talk</string>
+    <string name="some_id">게시판 이용 수칙 안내</string>
 </resources>
