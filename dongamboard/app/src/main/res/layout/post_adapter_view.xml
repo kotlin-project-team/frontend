@@ -7,7 +7,7 @@
     android:background="#EFE8FC">
 
     <TextView
-        android:id="@+id/tvPostTitle"
+        android:id="@+id/tvPostlistTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvCmtCnt"
+        android:id="@+id/tvPostlistLikes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
@@ -40,7 +40,7 @@
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPostTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvPostlistTitle"
         app:srcCompat="@drawable/nline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
