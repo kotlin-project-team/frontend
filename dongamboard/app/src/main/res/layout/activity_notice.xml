@@ -16,19 +16,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-<!--        <TextView-->
-<!--            android:id="@+id/some_id"-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="28dp"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginLeft="23dp"-->
-<!--            android:layout_marginTop="187dp"-->
-<!--            android:gravity="top"-->
-<!--            android:onClick="onClick"-->
-<!--            android:fontFamily="@font/bmjua_otf"-->
-<!--            android:text="@string/some_id"-->
-<!--            android:textAppearance="@style/some_id" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/some_id"-->
+        <!--            android:layout_width="200dp"-->
+        <!--            android:layout_height="28dp"-->
+        <!--            android:layout_alignParentLeft="true"-->
+        <!--            android:layout_alignParentTop="true"-->
+        <!--            android:layout_marginLeft="23dp"-->
+        <!--            android:layout_marginTop="187dp"-->
+        <!--            android:gravity="top"-->
+        <!--            android:onClick="onClick"-->
+        <!--            android:fontFamily="@font/bmjua_otf"-->
+        <!--            android:text="@string/some_id"-->
+        <!--            android:textAppearance="@style/some_id" />-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
