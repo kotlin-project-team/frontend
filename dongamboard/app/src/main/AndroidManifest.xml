@@ -20,6 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".NoticeActivity"></activity>
+        <activity android:name=".NoticeListActivity"></activity>
+
+        <activity android:name=".BestActivity"></activity>
+
+        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".PostListActivity"></activity>
+        <activity android:name=".PostCreateActivity"></activity>
     </application>
 
 </manifest>
