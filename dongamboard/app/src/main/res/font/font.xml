@@ -3,6 +3,6 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/bmjua_otf"
+        android:font="@font/nanum_square_round_b"
         />
 </font-family>

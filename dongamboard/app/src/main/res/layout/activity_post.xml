@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFE8FC">
+    android:background="#E5D1EE">
 
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:background="#E5D1EE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:layout_marginTop="28dp"
         android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -18,33 +28,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:fontFamily="@font/bmjua_otf"
-        android:text="솜솜톡 읽기"
-        android:textColor="#744242"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="60dp"
         android:layout_height="55dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gotoback" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="솜솜톡 읽기"
+        android:textColor="#744242"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="410dp"
         android:layout_height="275dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7">
 
@@ -54,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
             android:layout_marginTop="12dp"
-            android:fontFamily="@font/bmjua_otf"
             android:text="글 제목 입니다"
             android:textColor="#512929"
             android:textSize="24sp"
@@ -80,7 +92,6 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="243dp"
-            android:fontFamily="@font/bmjua_otf"
             android:text="[댓글 0]"
             android:textColor="#000000"
             android:textSize="14sp"
@@ -95,7 +106,6 @@
             android:layout_marginStart="39dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="145dp"
-            android:fontFamily="@font/bmjua_otf"
             android:text="글 내용입니다 자세히 볼 수 있음"
             android:textColor="#000000"
             android:textSize="19sp"
@@ -110,7 +120,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/bmjua_otf"
             android:text="[솜솜픽 1]"
             android:textColor="#000000"
             android:textSize="14sp"
@@ -123,6 +132,7 @@
         android:id="@+id/constraintLayout3"
         android:layout_width="414dp"
         android:layout_height="53dp"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
@@ -159,6 +169,7 @@
         android:layout_width="411dp"
         android:layout_height="168dp"
         android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 

@@ -10,9 +10,14 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+        <item name="android:statusBarColor">#E6D2EF</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!--        <item name="android:windowFullscreen">true</item>-->
+
     </style>
 
     <style name="somsom_s_ta">
@@ -38,7 +43,26 @@
         </item>
 
         <item name="android:fontFamily">
-            @font/bmjua_otf
+            @font/nanum_square_round_b
         </item>
     </style>
+
+
+    <style name="nanumTextView" parent="android:Widget.TextView">
+
+        <item name="android:fontFamily">
+            @font/nanum_square_round_b
+        </item>
+
+    </style>
+
+    <style name="nanumButton" parent="android:Widget.Button">
+
+        <item name="android:fontFamily">
+            @font/nanum_square_round_b
+        </item>
+
+    </style>
+
+
 </resources>

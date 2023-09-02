@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFE8FC">
+    android:background="#E5D1EE">
 
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:background="#E5D1EE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:layout_marginTop="28dp"
         android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -18,46 +28,52 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:fontFamily="@font/bmjua_otf"
-        android:text="공지사항"
-        android:textColor="#744242"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="60dp"
         android:layout_height="55dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gotoback" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="622dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="411dp"
+        android:layout_height="649dp"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7">
+
+        <TextView
+            android:id="@+id/tvNoticeContent"
+            android:layout_width="340dp"
+            android:layout_height="470dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/nanum_square_round_b"
+            android:text="공지 내용"
+            android:textColor="#000000"
+            android:textSize="19sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.483"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
         <TextView
             android:id="@+id/tvNoticeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:fontFamily="@font/bmjua_otf"
+            android:layout_marginTop="52dp"
+            android:fontFamily="@font/nanum_square_round_b"
             android:text="공지 제목"
             android:textColor="#512929"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,28 +82,28 @@
             android:layout_width="350dp"
             android:layout_height="1dp"
             android:layout_marginStart="39dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="21dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNoticeTitle"
             app:srcCompat="@drawable/nline" />
 
-        <TextView
-            android:id="@+id/tvNoticeContent"
-            android:layout_width="340dp"
-            android:layout_height="470dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/bmjua_otf"
-            android:text="공지 내용"
-            android:textColor="#000000"
-            android:textSize="19sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView15" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/nanum_square_round_b"
+        android:text="공지사항"
+        android:textColor="#744242"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

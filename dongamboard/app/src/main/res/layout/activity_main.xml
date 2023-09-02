@@ -4,16 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E5D1EE"
     tools:context=".MainActivity">
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="0dp"
+        android:layout_height="28dp"
+        android:background="#E5D1EE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:id="@+id/android_sma"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/android_sma"
         android:clipToOutline="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toBottomOf="@+id/space">
 
         <!-- 공지사항 -->
 
@@ -27,48 +37,30 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/menu" />
 
+            <TextView
+                android:id="@+id/textMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="SomSom's Talk"
+                android:textColor="#744242"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="718dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-                <ScrollView
-                    android:layout_width="343dp"
-                    android:layout_height="400dp"
-                    android:layout_marginStart="43dp"
-                    android:layout_marginTop="336dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <ListView
-                            android:layout_width="match_parent"
-                            android:layout_height="330dp" />
-                    </LinearLayout>
-                </ScrollView>
-
-                <TextView
-                    android:id="@+id/textMain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/bmjua_otf"
-                    android:text="SomSom's Talk"
-                    android:textColor="#744242"
-                    android:textSize="26sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -82,20 +74,20 @@
 
                 <TextView
                     android:id="@+id/textNotice"
-                    android:layout_width="76dp"
+                    android:layout_width="99dp"
                     android:layout_height="29dp"
                     android:layout_marginStart="6dp"
                     android:layout_marginTop="58dp"
                     android:gravity="top"
-                    android:textColor="#512929"
                     android:text="공지사항"
                     android:textAppearance="@style/some_id"
+                    android:textColor="#512929"
                     android:textSize="23sp"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ListView
-                    android:layout_width="291dp"
+                    android:layout_width="295dp"
                     android:layout_height="56dp"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="4dp"
@@ -109,77 +101,66 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="52dp"
+                    android:layout_marginTop="92dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
                     app:srcCompat="@drawable/spa_flower" />
+
+                <TextView
+                    android:id="@+id/textBest"
+                    android:layout_width="0dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="92dp"
+                    android:gravity="top"
+                    android:text="솜솜픽 Best"
+                    android:textAppearance="@style/some_id"
+                    android:textColor="#512929"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/textNotice" />
+
+                <ListView
+                    android:layout_width="295dp"
+                    android:layout_height="118dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/textBest" />
+
+                <TextView
+                    android:id="@+id/textTalk"
+                    android:layout_width="0dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="136dp"
+                    android:gravity="top"
+                    android:text="실시간 솜솜톡"
+                    android:textAppearance="@style/some_id"
+                    android:textColor="#512929"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toBottomOf="@+id/textBest" />
 
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="136dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView2"
                     app:srcCompat="@drawable/rect" />
 
-                <TextView
-                    android:id="@+id/textTalk"
-                    android:layout_width="114dp"
-                    android:layout_height="29dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="199dp"
-                    android:gravity="top"
-                    android:textColor="#512929"
-                    android:text="실시간 솜솜톡"
-                    android:textAppearance="@style/some_id"
+                <ListView
+                    android:layout_width="295dp"
+                    android:layout_height="259dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toEndOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/textNotice" />
+                    app:layout_constraintTop_toBottomOf="@+id/textTalk" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textBest"
-            android:layout_width="106dp"
-            android:layout_height="29dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="154dp"
-            android:gravity="top"
-            android:text="솜솜픽 Best"
-            android:textAppearance="@style/some_id"
-            android:textColor="#512929" />
-
-        <!-- 실시간 솜솜톡 -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ScrollView
-                android:layout_width="292dp"
-                android:layout_height="78dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="196dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:layout_width="344dp"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-            </ScrollView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- Rectangle 4 -->
 
     </RelativeLayout>
 
