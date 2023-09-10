@@ -19,7 +19,7 @@
 
     <RelativeLayout
         android:id="@+id/android_sma2"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="703dp"
         android:background="@drawable/android_sma2"
         android:clipToOutline="true"
@@ -33,7 +33,7 @@
             <ImageView
                 android:id="@+id/imageView10"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
