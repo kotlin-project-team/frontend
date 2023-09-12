@@ -26,7 +26,7 @@ abstract class PostDB : RoomDatabase() {
                         context.applicationContext,
                         PostDB::class.java,
                         "post.db"
-                    ).build()
+                    ).allowMainThreadQueries().build()
                 }
             return instance
         }
