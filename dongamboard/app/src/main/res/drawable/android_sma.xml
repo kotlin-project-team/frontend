@@ -7,7 +7,7 @@
 
     <!-- 배경, 상단바 -->
     <path
-        android:fillColor="#FFF1E9FF"
+        android:fillColor="#FFFFFFFF"
         android:pathData="M0 0H360V640H0z"/>
 
     <path
