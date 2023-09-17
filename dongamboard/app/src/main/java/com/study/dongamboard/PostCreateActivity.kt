@@ -25,9 +25,11 @@ class PostCreateActivity : AppCompatActivity() {
 
         postDB = PostDB.getInstance(this)
 
+        var tempId = 0
+        tempId = postDB?.postDao()?.findAll()?.size!!
         val createPostRunnable = Runnable {
             val newPost = PostData(
-                5,
+                tempId,
                 20200982,
                 findViewById<EditText>(R.id.etPostCreateTitle).text.toString(),
                 findViewById<EditText>(R.id.etPostCreateContent).text.toString(),

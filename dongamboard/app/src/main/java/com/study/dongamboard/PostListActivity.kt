@@ -17,7 +17,9 @@ import com.study.dongamboard.model.PostData
 class PostListActivity : AppCompatActivity() {
 
     lateinit var postAdapter: PostAdapter
-    var postDB : PostDB? = null
+    lateinit var lvPost: ListView
+    var postDB: PostDB? = null
+    var postList: ArrayList<PostData>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,33 +32,13 @@ class PostListActivity : AppCompatActivity() {
 
         postDB = PostDB.getInstance(this)
 
-        var postList : ArrayList<PostData> = arrayListOf<PostData>()
-        postList.apply {
-            add(PostData(0, 20200982, "게시글1", "예제", "일반", 0, 0/*,
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())*/))
-            add(PostData(1, 20200000, "게시글2", "게시게시", "일반", 1, 0/*,
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())*/))
-            add(PostData(2, 20200000, "게시글3", "게시게시물입니다. 안녕", "일반", 3, 0/*,
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())*/))
-        }
-
-        val lvPost = findViewById<ListView>(R.id.lvPost)
-
-        runOnUiThread {
-            postList = (postDB!!.postDao().findAll() as ArrayList<PostData>?)!!
-            postAdapter = PostAdapter(this, R.layout.post_adapter_view,
-                postList as MutableList<PostData>
-            )
-            postAdapter.notifyDataSetChanged()
-            lvPost.adapter = postAdapter
-            Log.d("postList", postList.toString())
-        }
+        lvPost = findViewById<ListView>(R.id.lvPost)
+        postList = arrayListOf<PostData>()
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
             Toast.makeText(this, "post [id=" + i + "] 호출", Toast.LENGTH_SHORT).show()
-
             val intent = Intent(this, PostActivity::class.java)
-            intent.putExtra("postData", postList.get(i))
+            intent.putExtra("postData", postList!!.get(i))
             startActivity(intent)
         }
 
@@ -68,9 +50,27 @@ class PostListActivity : AppCompatActivity() {
 
     }
 
+    private fun readAllPosts() {
+        runOnUiThread {
+            postList = (postDB!!.postDao().findAll() as ArrayList<PostData>?)!!
+            postAdapter = PostAdapter(this, R.layout.post_adapter_view,
+                postList as MutableList<PostData>
+            )
+            postAdapter.notifyDataSetChanged()
+            lvPost.adapter = postAdapter
+            Log.d("postList", postList.toString())
+        }
+    }
+
+    override fun onResume() {
+        readAllPosts()
+        super.onResume()
+    }
+
     override fun onDestroy() {
         PostDB.destroyInstance()
         super.onDestroy()
     }
+
 
 }
