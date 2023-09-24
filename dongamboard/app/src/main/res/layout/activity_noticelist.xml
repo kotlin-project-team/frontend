@@ -63,8 +63,8 @@
                 app:srcCompat="@drawable/gotoback" />
 
             <ScrollView
-                android:layout_width="408dp"
-                android:layout_height="494dp"
+                android:layout_width="0dp"
+                android:layout_height="531dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
                     <ListView
                         android:id="@+id/lvNotice"
                         android:layout_width="match_parent"
-                        android:layout_height="460dp" />
+                        android:layout_height="533dp" />
                 </LinearLayout>
             </ScrollView>
 
@@ -94,6 +94,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/som1" />
+
+            <ImageView
+                android:id="@+id/ivNoticeCreate"
+                android:layout_width="97dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="32dp"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

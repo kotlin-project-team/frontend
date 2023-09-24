@@ -1,12 +1,18 @@
 package com.study.dongamboard.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
-import java.sql.Timestamp
 
-data class NoticeData(var id: Int,
-                      var title: String,
-                      var content: String,
-                      var category: String,
-                      var createdAt: Timestamp,
-                      var updatedAt: Timestamp
+@Entity(tableName = "notice_table")
+data class NoticeData(
+    @PrimaryKey(autoGenerate = false)
+    var id: Int,
+    @ColumnInfo
+    var title: String? = null,
+    @ColumnInfo
+    var content: String? = null,
+    @ColumnInfo
+    var category: String? = null
 ) : Serializable

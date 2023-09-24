@@ -3,17 +3,22 @@ package com.study.dongamboard
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.adapter.NoticeAdapter
+import com.study.dongamboard.db.NoticeDB
 import com.study.dongamboard.model.NoticeData
-import java.sql.Timestamp
 
 class NoticeListActivity : AppCompatActivity() {
 
     lateinit var noticeAdapter: NoticeAdapter
+    lateinit var lvNotice: ListView
+    var noticeDB: NoticeDB? = null
+    var noticeList : ArrayList<NoticeData>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,27 +29,47 @@ class NoticeListActivity : AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
-        var noticeList : ArrayList<NoticeData> = arrayListOf<NoticeData>()
-        noticeList.apply {
-            add(NoticeData(0, "공지3", "예제", "일반",
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())))
-            add(NoticeData(1, "공지2", "게시게시", "일반",
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())))
-            add(NoticeData(2, "게시판 이용수칙 안내", "게시판 이용수칙 1. ... 2. ...", "일반",
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())))
-        }
+        noticeDB = NoticeDB.getInstance(this)
 
-        val lvNotice = findViewById<ListView>(R.id.lvNotice)
-        noticeAdapter = NoticeAdapter(this, R.layout.notice_adapter_view, noticeList)
-        lvNotice.adapter = noticeAdapter
+        lvNotice = findViewById<ListView>(R.id.lvNotice)
+        noticeList = arrayListOf<NoticeData>()
+
         lvNotice.setOnItemClickListener { adapterView, view, i, l ->
             Toast.makeText(this, "notice [id=" + i + "] 호출", Toast.LENGTH_SHORT).show()
-
             val intent = Intent(this, NoticeActivity::class.java)
-            intent.putExtra("noticeData", noticeList.get(i))
+            intent.putExtra("noticeData", noticeList!!.get(i))
+            startActivity(intent)
+        }
+
+        val ivNoticeCreate = findViewById<ImageView>(R.id.ivNoticeCreate)
+        ivNoticeCreate.setOnClickListener {
+            val intent = Intent(this, NoticeCreateActivity::class.java)
             startActivity(intent)
         }
 
     }
+
+    private fun readAllNotices() {
+        runOnUiThread {
+            noticeList = (noticeDB!!.noticeDao().findAll() as ArrayList<NoticeData>?)!!
+            noticeAdapter = NoticeAdapter(this, R.layout.notice_adapter_view,
+                noticeList as MutableList<NoticeData>
+            )
+            noticeAdapter.notifyDataSetChanged()
+            lvNotice.adapter = noticeAdapter
+            Log.d("noticeList", noticeList.toString())
+        }
+    }
+
+    override fun onResume() {
+        readAllNotices()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        NoticeDB.destroyInstance()
+        super.onDestroy()
+    }
+
 
 }
