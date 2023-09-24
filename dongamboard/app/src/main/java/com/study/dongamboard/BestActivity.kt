@@ -22,12 +22,9 @@ class BestActivity : AppCompatActivity() {
 
         var postList : ArrayList<PostData> = arrayListOf<PostData>()
         postList.apply {
-            add(PostData(0, 20200982, "베스트1", "베스트1 예제", "일반", 0, 0,
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())))
-            add(PostData(1, 20200000, "베스트2", "베스트2 게시게시", "일반", 1, 0,
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())))
-            add(PostData(2, 20200000, "베스트3", "베스트3 게시게시물입니다. 안녕", "일반", 3, 0,
-                Timestamp(System.currentTimeMillis()), Timestamp(System.currentTimeMillis())))
+            add(PostData(0, 20200982, "베스트1", "베스트1 예제", "일반", 0, 0))
+            add(PostData(1, 20200000, "베스트2", "베스트2 게시게시", "일반", 1, 0))
+            add(PostData(2, 20200000, "베스트3", "베스트3 게시게시물입니다. 안녕", "일반", 3, 0))
         }
 
         postList.forEachIndexed { index, post ->
