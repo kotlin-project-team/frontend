@@ -10,7 +10,7 @@ data class NoticeData(
     @PrimaryKey(autoGenerate = false)
     var id: Int,
     @ColumnInfo
-    var title: String? = null,
+    var title: String,
     @ColumnInfo
     var content: String? = null,
     @ColumnInfo

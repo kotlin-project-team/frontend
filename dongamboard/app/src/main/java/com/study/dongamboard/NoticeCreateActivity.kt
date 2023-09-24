@@ -12,7 +12,7 @@ import com.study.dongamboard.model.NoticeData
 
 class NoticeCreateActivity : AppCompatActivity() {
 
-    var noticeDB : NoticeDB? = null
+    lateinit var noticeDB : NoticeDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,18 +23,18 @@ class NoticeCreateActivity : AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
-        noticeDB = NoticeDB.getInstance(this)
+        noticeDB = NoticeDB.getInstance(this)!!
 
         var tempId = 0
-        tempId = noticeDB?.noticeDao()?.findAll()?.size!!
+        tempId = noticeDB.noticeDao().findAll().size
         val createNoticeRunnable = Runnable {
             val newNotice = NoticeData(
                 tempId,
                 findViewById<EditText>(R.id.etPostCreateTitle).text.toString(),
                 findViewById<EditText>(R.id.etPostCreateContent).text.toString(),
                 "일반")
-            noticeDB?.noticeDao()?.insertNotice(newNotice)
-            Log.d("InsertedNoticeList", noticeDB?.noticeDao()?.findAll().toString())
+            noticeDB.noticeDao().insertNotice(newNotice)
+            Log.d("InsertedNoticeList", noticeDB.noticeDao().findAll().toString())
         }
 
         val ivCreateNoticeBtn = findViewById<ImageView>(R.id.ivCreatePostBtn)
