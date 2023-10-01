@@ -17,8 +17,8 @@ class NoticeListActivity : AppCompatActivity() {
 
     lateinit var noticeAdapter: NoticeAdapter
     lateinit var lvNotice: ListView
-    var noticeDB: NoticeDB? = null
-    var noticeList : ArrayList<NoticeData>? = null
+    lateinit var noticeDB: NoticeDB
+    lateinit var noticeList : ArrayList<NoticeData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class NoticeListActivity : AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
-        noticeDB = NoticeDB.getInstance(this)
+        noticeDB = NoticeDB.getInstance(this)!!
 
         lvNotice = findViewById<ListView>(R.id.lvNotice)
         noticeList = arrayListOf<NoticeData>()
@@ -37,7 +37,7 @@ class NoticeListActivity : AppCompatActivity() {
         lvNotice.setOnItemClickListener { adapterView, view, i, l ->
             Toast.makeText(this, "notice [id=" + i + "] 호출", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, NoticeActivity::class.java)
-            intent.putExtra("noticeData", noticeList!!.get(i))
+            intent.putExtra("noticeData", noticeList.get(i))
             startActivity(intent)
         }
 
@@ -51,7 +51,7 @@ class NoticeListActivity : AppCompatActivity() {
 
     private fun readAllNotices() {
         runOnUiThread {
-            noticeList = (noticeDB!!.noticeDao().findAll() as ArrayList<NoticeData>?)!!
+            noticeList = noticeDB.noticeDao().findAll() as ArrayList<NoticeData>
             noticeAdapter = NoticeAdapter(this, R.layout.notice_adapter_view,
                 noticeList as MutableList<NoticeData>
             )

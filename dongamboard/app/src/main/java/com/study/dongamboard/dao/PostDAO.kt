@@ -5,9 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.TypeConverters
 import androidx.room.Update
-import com.study.dongamboard.Converters
 import com.study.dongamboard.model.PostData
 
 @Dao

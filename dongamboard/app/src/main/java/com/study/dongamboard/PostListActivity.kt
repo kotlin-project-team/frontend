@@ -18,8 +18,8 @@ class PostListActivity : AppCompatActivity() {
 
     lateinit var postAdapter: PostAdapter
     lateinit var lvPost: ListView
-    var postDB: PostDB? = null
-    var postList: ArrayList<PostData>? = null
+    lateinit var postDB: PostDB
+    lateinit var postList: ArrayList<PostData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class PostListActivity : AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
-        postDB = PostDB.getInstance(this)
+        postDB = PostDB.getInstance(this)!!
 
         lvPost = findViewById<ListView>(R.id.lvPost)
         postList = arrayListOf<PostData>()
@@ -38,7 +38,7 @@ class PostListActivity : AppCompatActivity() {
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
             Toast.makeText(this, "post [id=" + i + "] 호출", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PostActivity::class.java)
-            intent.putExtra("postData", postList!!.get(i))
+            intent.putExtra("postData", postList.get(i))
             startActivity(intent)
         }
 
@@ -52,7 +52,7 @@ class PostListActivity : AppCompatActivity() {
 
     private fun readAllPosts() {
         runOnUiThread {
-            postList = (postDB!!.postDao().findAll() as ArrayList<PostData>?)!!
+            postList = postDB.postDao().findAll() as ArrayList<PostData>
             postAdapter = PostAdapter(this, R.layout.post_adapter_view,
                 postList as MutableList<PostData>
             )

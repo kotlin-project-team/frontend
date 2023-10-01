@@ -28,13 +28,20 @@
 
         <activity android:name=".NoticeActivity"></activity>
         <activity android:name=".NoticeListActivity"></activity>
-        <activity android:name=".NoticeCreateActivity"></activity>
+        <activity
+            android:name=".NoticeCreateActivity"
+            android:theme="@style/Theme.Design.NoActionBar"></activity>
 
         <activity android:name=".BestActivity"></activity>
 
-        <activity android:name=".PostActivity"></activity>
+        <activity
+            android:name=".PostActivity"
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".PostListActivity"></activity>
-        <activity android:name=".PostCreateActivity"></activity>
+        <activity
+            android:name=".PostCreateActivity"
+            android:theme="@style/Theme.Design.NoActionBar"></activity>
     </application>
 
 </manifest>

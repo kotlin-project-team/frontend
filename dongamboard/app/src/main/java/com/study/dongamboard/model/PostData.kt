@@ -3,27 +3,42 @@ package com.study.dongamboard.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.study.dongamboard.Converters
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.io.Serializable
-import java.sql.Timestamp
 
 @Entity(tableName = "post_table")
+@JsonClass(generateAdapter = true)
 data class PostData(
+    @field:Json(name = "id")
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    val id: Int,
+
+    @field:Json(name = "userId")
     @ColumnInfo(name = "user_id")
-    var userId: Int,
+    val userId: Int,
+
+    @field:Json(name = "title")
     @ColumnInfo
-    var title: String,
+    val title: String,
+
+    @field:Json(name = "content")
     @ColumnInfo
-    var content: String,
+    val content: String? = null,
+
+    @field:Json(name = "category")
     @ColumnInfo
-    var category: String,
+    val category: String? = null,
+
+    @field:Json(name = "likes")
     @ColumnInfo
-    var likes: Int,
+    val likes: Int? = null,
+
+    @field:Json(name = "views")
     @ColumnInfo
-    var views: Int
-//    var createdAt: Timestamp,
-//    var updatedAt: Timestamp
+    val views: Int? = null,
+
+    @field:Json(name = "comments")
+    @ColumnInfo
+    val comments: List<CommentData>? = null
 ) : Serializable
