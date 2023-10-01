@@ -47,11 +47,10 @@ class PostActivity : AppCompatActivity() {
         lvCmt = findViewById<ListView>(R.id.lvCmt)
         commentList = arrayListOf<CommentData>()
 
-        val tempId = commentDB.commentDao().findAll().size
         val createCommentRunnable = Runnable {
             val newComment =
                 CommentData(
-                    tempId,
+                    0,
                     post.id,
                     findViewById<EditText>(R.id.etCmtCnt).text.toString(),
                     "익명"
