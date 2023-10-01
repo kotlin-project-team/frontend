@@ -7,7 +7,7 @@ import java.io.Serializable
 
 @Entity(tableName = "notice_table")
 data class NoticeData(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     var id: Int,
     @ColumnInfo
     var title: String,

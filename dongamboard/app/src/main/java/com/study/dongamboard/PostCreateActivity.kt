@@ -1,9 +1,7 @@
 package com.study.dongamboard
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -19,17 +17,11 @@ class PostCreateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
-        this.window?.apply {
-            this.statusBarColor = Color.TRANSPARENT
-            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
-
         postDB = PostDB.getInstance(this)!!
 
-        val tempId = postDB.postDao().findAll().size
         val createPostRunnable = Runnable {
             val newPost = PostData(
-                tempId,
+                0,
                 20200982,
                 findViewById<EditText>(R.id.etPostCreateTitle).text.toString(),
                 findViewById<EditText>(R.id.etPostCreateContent).text.toString(),
