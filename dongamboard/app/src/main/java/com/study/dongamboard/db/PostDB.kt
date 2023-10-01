@@ -5,12 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.study.dongamboard.Converters
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.study.dongamboard.CommentListTypeConverter
 import com.study.dongamboard.dao.PostDAO
 import com.study.dongamboard.model.PostData
 
 @Database(entities = [PostData::class], version = 1, exportSchema = false)
-//@TypeConverters(Converters::class)
+@TypeConverters(CommentListTypeConverter::class)
 abstract class PostDB : RoomDatabase() {
     abstract fun postDao(): PostDAO
 
@@ -18,15 +20,23 @@ abstract class PostDB : RoomDatabase() {
         @Volatile
         private var instance: PostDB? = null
 
+        val moshi = Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
+            .build()
+
         @Synchronized
         fun getInstance(context: Context): PostDB? {
             if (instance == null)
                 synchronized(PostDB::class) {
-                    instance = Room.databaseBuilder(
+                    instance = Room
+                        .databaseBuilder(
                         context.applicationContext,
                         PostDB::class.java,
                         "post.db"
-                    ).allowMainThreadQueries().build()
+                    )
+                        .addTypeConverter(CommentListTypeConverter(moshi))
+                        .allowMainThreadQueries()
+                        .build()
                 }
             return instance
         }
