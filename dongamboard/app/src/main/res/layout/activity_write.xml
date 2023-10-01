@@ -6,23 +6,14 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <Space
-        android:id="@+id/space"
-        android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:background="#E5D1EE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="53dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle" />
 
     <ImageView
@@ -56,32 +47,21 @@
         app:layout_constraintTop_toTopOf="@+id/imageView7"
         app:srcCompat="@drawable/check" />
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/nanum_square_round_b"
-        android:text="제목"
-        android:textColor="#4F512929"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
-
     <ImageView
         android:id="@+id/imageView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/tline" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="391dp"
-        android:layout_height="264dp"
+        android:layout_height="564dp"
         android:layout_marginTop="164dp"
         android:background="#FFFFFF"
         android:textColorHint="#4A242222"
@@ -95,11 +75,13 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etPostCreateTitle"
         android:layout_width="0dp"
-        android:layout_height="85dp"
+        android:layout_height="55dp"
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
-        android:hint="제목을 입력하세요"
+        android:hint="제목"
         android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#744242"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,15 +90,17 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etPostCreateContent"
         android:layout_width="0dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="124dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:hint="내용을 입력하세요"
-        android:inputType="text"
+        android:inputType="text|textMultiLine"
+        android:textColor="#000000"
+        android:textColorHint="#744242"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
