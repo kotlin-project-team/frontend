@@ -7,9 +7,14 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
+import com.study.dongamboard.api.ApiObject
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.PostData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PostListActivity : AppCompatActivity() {
 
@@ -38,6 +43,14 @@ class PostListActivity : AppCompatActivity() {
         ivPostCreate.setOnClickListener {
             val intent = Intent(this, PostCreateActivity::class.java)
             startActivity(intent)
+        }
+
+        var swipe = findViewById<SwipeRefreshLayout>(R.id.swipePostlistLayout)
+        swipe.setOnRefreshListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                Log.d("api post list", ApiObject.getRetrofitAPIService.getAllPosts().toString())
+            }
+            swipe.isRefreshing = false
         }
 
     }
