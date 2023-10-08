@@ -91,7 +91,6 @@
         android:id="@+id/etPostCreateContent"
         android:layout_width="0dp"
         android:layout_height="165dp"
-        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         android:hint="내용을 입력하세요"
         android:inputType="text|textMultiLine"

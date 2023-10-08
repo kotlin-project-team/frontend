@@ -7,20 +7,10 @@
     android:background="#E5D1EE">
 
 
-    <Space
-        android:id="@+id/space"
-        android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:background="#E5D1EE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginTop="28dp"
         android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,7 +22,6 @@
         android:id="@+id/imageView8"
         android:layout_width="60dp"
         android:layout_height="55dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gotoback" />
@@ -96,7 +85,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/nanum_square_round_b"
         android:text="공지사항"
         android:textColor="#744242"

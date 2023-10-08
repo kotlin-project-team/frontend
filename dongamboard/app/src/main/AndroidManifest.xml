@@ -18,7 +18,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,22 +27,30 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".NoticeActivity"></activity>
-        <activity android:name=".NoticeListActivity"></activity>
+        <activity
+            android:name=".NoticeActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".NoticeListActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".NoticeCreateActivity"
-            android:theme="@style/Theme.Design.NoActionBar"></activity>
+            android:theme="@style/Theme.Design.NoActionBar" />
 
-        <activity android:name=".BestActivity"></activity>
+        <activity
+            android:name=".BestActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
 
         <activity
             android:name=".PostActivity"
             android:theme="@style/Theme.Design.NoActionBar"
-            android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".PostListActivity"></activity>
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".PostListActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
         <activity
             android:name=".PostCreateActivity"
-            android:theme="@style/Theme.Design.NoActionBar"></activity>
+            android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 
 </manifest>

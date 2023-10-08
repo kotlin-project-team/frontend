@@ -1,10 +1,8 @@
 package com.study.dongamboard
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.PostData
-
 
 class PostListActivity : AppCompatActivity() {
 
@@ -24,11 +21,6 @@ class PostListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
-
-        this.window?.apply {
-            this.statusBarColor = Color.TRANSPARENT
-            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
 
         postDB = PostDB.getInstance(this)!!
 
