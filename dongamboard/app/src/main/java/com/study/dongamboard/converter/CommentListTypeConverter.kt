@@ -1,4 +1,4 @@
-package com.study.dongamboard
+package com.study.dongamboard.converter
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter

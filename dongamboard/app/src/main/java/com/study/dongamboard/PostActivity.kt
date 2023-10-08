@@ -15,7 +15,6 @@ import com.study.dongamboard.adapter.CommentAdapter
 import com.study.dongamboard.db.CommentDB
 import com.study.dongamboard.model.CommentData
 import com.study.dongamboard.model.PostData
-import java.lang.Thread.sleep
 
 class PostActivity : AppCompatActivity() {
 
