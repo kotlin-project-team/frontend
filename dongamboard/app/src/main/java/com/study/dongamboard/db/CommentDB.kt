@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.study.dongamboard.dao.CommentDAO
 import com.study.dongamboard.model.CommentData
 
@@ -17,10 +15,6 @@ abstract class CommentDB : RoomDatabase() {
     companion object {
         @Volatile
         private var instance: CommentDB? = null
-
-        val moshi = Moshi.Builder()
-            .addLast(KotlinJsonAdapterFactory())
-            .build()
 
         @Synchronized
         fun getInstance(context: Context): CommentDB? {

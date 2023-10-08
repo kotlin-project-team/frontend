@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.study.dongamboard.converter.NoticeListTypeConverter
 import com.study.dongamboard.dao.NoticeDAO
 import com.study.dongamboard.model.NoticeData
 
 @Database(entities = [NoticeData::class], version = 1, exportSchema = false)
+@TypeConverters(NoticeListTypeConverter::class)
 abstract class NoticeDB: RoomDatabase() {
 
     abstract fun noticeDao(): NoticeDAO
@@ -24,7 +27,9 @@ abstract class NoticeDB: RoomDatabase() {
                         context.applicationContext,
                         NoticeDB::class.java,
                         "notice.db"
-                    ).allowMainThreadQueries().build()  // 추후 allowMainThreadQueries() 제거
+                    )
+                        .allowMainThreadQueries()  // 추후 allowMainThreadQueries() 제거
+                        .build()
                 }
             return instance
         }
