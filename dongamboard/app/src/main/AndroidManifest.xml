@@ -28,6 +28,16 @@
         </activity>
 
         <activity
+            android:name=".UserActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".JoinActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+
+        <activity
             android:name=".NoticeActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity

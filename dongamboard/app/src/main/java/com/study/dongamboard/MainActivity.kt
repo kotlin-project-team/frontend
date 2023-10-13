@@ -3,6 +3,7 @@ package com.study.dongamboard
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         val btnTextTalk = findViewById<TextView>(R.id.textTalk)
         btnTextTalk.setOnClickListener {
             val intent = Intent(this, PostListActivity::class.java)
+            startActivity(intent)
+        }
+
+        val ivUserPage = findViewById<ImageView>(R.id.ivUserPage)
+        ivUserPage.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
