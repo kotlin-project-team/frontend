@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface APIService {
+interface ApiService {
     @GET("/api/post")
     suspend fun getAllPost(): List<PostData>
 
