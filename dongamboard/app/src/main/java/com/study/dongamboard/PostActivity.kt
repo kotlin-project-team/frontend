@@ -12,35 +12,32 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.adapter.CommentAdapter
+import com.study.dongamboard.api.ApiObject
 import com.study.dongamboard.db.CommentDB
+import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.CommentData
 import com.study.dongamboard.model.PostData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PostActivity : AppCompatActivity() {
 
+    lateinit var postDB: PostDB
+    lateinit var post: PostData
     lateinit var commentAdapter: CommentAdapter
     lateinit var lvCmt: ListView
     lateinit var commentDB: CommentDB
     lateinit var commentList: ArrayList<CommentData>
 
-    lateinit var post: PostData
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
 
-        val tvPostTitle = findViewById<TextView>(R.id.tvPostlistTitle)
-        val tvLikes = findViewById<TextView>(R.id.tvPostlistLikes)
-        val tvCmtCnt = findViewById<TextView>(R.id.tvCmtCnt)
-        val tvPostContent = findViewById<TextView>(R.id.tvPostContent)
-
         post = intent.getSerializableExtra("postData") as PostData
+        reloadPost()
 
-        tvPostTitle.text = post.title
-        tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
-        tvCmtCnt.text = "[댓글 " + "0" + "]"
-        tvPostContent.text = post.content
-
+        postDB = PostDB.getInstance(this)!!
         commentDB = CommentDB.getInstance(this)!!
 
         lvCmt = findViewById<ListView>(R.id.lvCmt)
@@ -84,6 +81,28 @@ class PostActivity : AppCompatActivity() {
                 .show()
         }
 
+        val ivPostLike = findViewById<ImageView>(R.id.ivPostLike)
+        ivPostLike.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                ApiObject.getRetrofitAPIService.clickPostLike(post.id)
+                reloadPost()
+            }
+        }
+    }
+
+    private fun reloadPost() {
+        val tvPostTitle = findViewById<TextView>(R.id.tvPostTitle)
+        val tvPostContent = findViewById<TextView>(R.id.tvPostContent)
+        val tvLikes = findViewById<TextView>(R.id.tvPostLikes)
+        val tvCmtCnt = findViewById<TextView>(R.id.tvCmtCnt)
+
+        CoroutineScope(Dispatchers.Main).launch {
+            post = ApiObject.getRetrofitAPIService.getPostById(post.id)
+            tvPostTitle.text = post.title
+            tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
+            tvCmtCnt.text = "[댓글 " + "0" + "]"
+            tvPostContent.text = post.content
+        }
     }
 
     private fun readAllComments() {
@@ -112,6 +131,4 @@ class PostActivity : AppCompatActivity() {
         CommentDB.destroyInstance()
         super.onDestroy()
     }
-
-
 }

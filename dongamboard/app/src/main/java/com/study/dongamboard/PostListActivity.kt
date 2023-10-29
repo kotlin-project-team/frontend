@@ -2,10 +2,9 @@ package com.study.dongamboard
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.ListView
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
@@ -33,7 +32,6 @@ class PostListActivity : AppCompatActivity() {
         postList = arrayListOf<PostData>()
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
-            Toast.makeText(this, "post [id=" + i + "] 호출", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, PostActivity::class.java)
             intent.putExtra("postData", postList.get(i))
             startActivity(intent)
@@ -47,23 +45,19 @@ class PostListActivity : AppCompatActivity() {
 
         var swipe = findViewById<SwipeRefreshLayout>(R.id.swipePostlistLayout)
         swipe.setOnRefreshListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                Log.d("api post list", ApiObject.getRetrofitAPIService.getAllPosts().toString())
-            }
+            readAllPosts()
             swipe.isRefreshing = false
         }
-
     }
 
     private fun readAllPosts() {
-        runOnUiThread {
-            postList = postDB.postDao().findAll() as ArrayList<PostData>
-            postAdapter = PostAdapter(this, R.layout.post_adapter_view,
+        CoroutineScope(Dispatchers.Main).launch {
+            postList = ApiObject.getRetrofitAPIService.getAllPost() as ArrayList<PostData>
+            postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
                 postList as MutableList<PostData>
             )
             postAdapter.notifyDataSetChanged()
             lvPost.adapter = postAdapter
-            Log.d("postList", postList.toString())
         }
     }
 
@@ -76,6 +70,4 @@ class PostListActivity : AppCompatActivity() {
         PostDB.destroyInstance()
         super.onDestroy()
     }
-
-
 }
