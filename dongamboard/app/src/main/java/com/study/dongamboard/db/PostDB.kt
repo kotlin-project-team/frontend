@@ -34,7 +34,6 @@ abstract class PostDB : RoomDatabase() {
                         "post.db"
                     )
                         .addTypeConverter(CommentListTypeConverter(ApiObject.moshi))
-                        .allowMainThreadQueries()
                         .build()
                 }
             return instance
