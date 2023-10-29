@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView7">
 
         <TextView
-            android:id="@+id/tvPostlistTitle"
+            android:id="@+id/tvPostTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
@@ -81,8 +81,8 @@
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvPostlistLikes"
-            app:layout_constraintTop_toBottomOf="@+id/tvPostlistTitle" />
+            app:layout_constraintStart_toEndOf="@+id/tvPostLikes"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostTitle" />
 
         <TextView
             android:id="@+id/tvPostContent"
@@ -100,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
         <TextView
-            android:id="@+id/tvPostlistLikes"
+            android:id="@+id/tvPostLikes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
@@ -109,7 +109,7 @@
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPostlistTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPostTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,7 +123,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <ImageView
-            android:id="@+id/imageView18"
+            android:id="@+id/ivPostLike"
             android:layout_width="93dp"
             android:layout_height="34dp"
             android:layout_marginStart="24dp"
@@ -136,7 +136,7 @@
             android:layout_width="121dp"
             android:layout_height="33dp"
             android:layout_marginStart="4dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView18"
+            app:layout_constraintStart_toEndOf="@+id/ivPostLike"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/btn2" />
 
