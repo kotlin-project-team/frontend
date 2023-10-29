@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class PostActivity : AppCompatActivity() {
 
     lateinit var postDB: PostDB
-    lateinit var post: PostData
+    lateinit var post: PostResponse
     lateinit var commentAdapter: CommentAdapter
     lateinit var lvCmt: ListView
     lateinit var commentDB: CommentDB
