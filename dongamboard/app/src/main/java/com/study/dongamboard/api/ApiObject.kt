@@ -20,5 +20,4 @@ object ApiObject {
     }
 
     val getRetrofitAPIService: APIService by lazy { getRetrofit.create(APIService::class.java) }
-
 }

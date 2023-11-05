@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.ListView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
@@ -30,6 +29,7 @@ class PostListActivity : AppCompatActivity() {
 
         lvPost = findViewById<ListView>(R.id.lvPost)
         postList = arrayListOf<PostData>()
+        readAllPosts()
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
             val intent = Intent(this, PostActivity::class.java)
