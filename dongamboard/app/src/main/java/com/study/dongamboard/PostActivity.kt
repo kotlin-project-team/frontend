@@ -152,7 +152,7 @@ class PostActivity : AppCompatActivity() {
             R.id.miDeletePost->{
                 CoroutineScope(Dispatchers.IO).launch {
                     ApiObject.getRetrofitAPIService.deletePost(post.id)
-                    // 댓글 삭제 요청 추가
+                    // TODO: 댓글 삭제 요청 추가
                     finish()
                 }
             }
