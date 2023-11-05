@@ -29,7 +29,7 @@ class PostUpdateActivity : AppCompatActivity() {
         etPostCreateContent.setText(post.content)
 
         val ivCreatePostBtn = findViewById<ImageView>(R.id.ivCreatePostBtn)
-        ivCreatePostBtn.setOnClickListener{
+        ivCreatePostBtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val postRequest = PostRequest(
                     etPostCreateTitle.text.toString(),
