@@ -2,7 +2,10 @@ package com.study.dongamboard
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -11,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.study.dongamboard.adapter.CommentAdapter
 import com.study.dongamboard.api.ApiObject
 import com.study.dongamboard.db.CommentDB
@@ -33,6 +37,12 @@ class PostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbarPost)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(false)
+        }
 
         post = intent.getSerializableExtra("postData") as PostData
         reloadPost()
@@ -95,6 +105,7 @@ class PostActivity : AppCompatActivity() {
         val tvPostContent = findViewById<TextView>(R.id.tvPostContent)
         val tvLikes = findViewById<TextView>(R.id.tvPostLikes)
         val tvCmtCnt = findViewById<TextView>(R.id.tvCmtCnt)
+        val tvPostCategory = findViewById<TextView>(R.id.tvPostCategory)
 
         CoroutineScope(Dispatchers.Main).launch {
             post = ApiObject.getRetrofitAPIService.getPostById(post.id)
@@ -102,6 +113,7 @@ class PostActivity : AppCompatActivity() {
             tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
             tvCmtCnt.text = "[댓글 " + "0" + "]"
             tvPostContent.text = post.content
+            tvPostCategory.text = post.category
         }
     }
 
@@ -120,6 +132,32 @@ class PostActivity : AppCompatActivity() {
     fun hideKeyboard(activity: PostActivity){
         val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(activity.window.decorView.applicationWindowToken, 0)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_post, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.miUpdatePost -> {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val intent = Intent(applicationContext, PostUpdateActivity::class.java)
+                    intent.putExtra("postData", post)
+                    startActivity(intent)
+                    reloadPost()
+                }
+            }
+            R.id.miDeletePost->{
+                CoroutineScope(Dispatchers.IO).launch {
+                    ApiObject.getRetrofitAPIService.deletePost(post.id)
+                    // TODO: 댓글 삭제 요청 추가
+                    finish()
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {

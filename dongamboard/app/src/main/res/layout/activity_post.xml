@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#E5D1EE">
 
-
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
@@ -18,6 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7D233F"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="60dp"
@@ -27,12 +37,12 @@
         app:srcCompat="@drawable/gotoback" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvPostCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="솜솜톡 읽기"
-        android:textColor="#744242"
+        android:textColor="#FFFFFF"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,15 +142,6 @@
             app:srcCompat="@drawable/btn1" />
 
         <ImageView
-            android:id="@+id/imageView20"
-            android:layout_width="121dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintStart_toEndOf="@+id/ivPostLike"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/btn2" />
-
-        <ImageView
             android:id="@+id/imageView21"
             android:layout_width="71dp"
             android:layout_height="34dp"
@@ -185,7 +186,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="61dp"
-            android:background="#F9EFFF"
+            android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -201,19 +202,19 @@
                 android:hint="댓글을 입력하세요"
                 android:inputType="textMultiLine"
                 android:textColor="#000000"
-                android:textColorHint="#9A5377"
+                android:textColorHint="#969696"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/ivCreateCmtBtn"
-                android:layout_width="51dp"
-                android:layout_height="39dp"
+                android:layout_width="67dp"
+                android:layout_height="37dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/spa_flower" />
+                app:srcCompat="@android:drawable/ic_menu_send" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
