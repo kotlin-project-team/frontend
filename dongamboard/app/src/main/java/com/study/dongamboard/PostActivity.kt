@@ -141,7 +141,7 @@ class PostActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.miUpdatePost->{
+            R.id.miUpdatePost -> {
                 CoroutineScope(Dispatchers.IO).launch {
                     val intent = Intent(applicationContext, PostUpdateActivity::class.java)
                     intent.putExtra("postData", post)
