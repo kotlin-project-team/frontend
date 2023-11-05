@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5D1EE">
-
-    <!-- Android Small - 1 -->
+    android:background="#7D233F">
 
     <RelativeLayout
         android:id="@+id/android_sma2"
@@ -32,6 +30,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/rectangle" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:background="#7D233F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
@@ -39,7 +45,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nanum_square_round_b"
                 android:text="공지사항"
-                android:textColor="#744242"
+                android:textColor="#FFFFFF"
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/imageView10"
@@ -94,9 +100,6 @@
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/button" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

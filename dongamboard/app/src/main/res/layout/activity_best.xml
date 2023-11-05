@@ -25,6 +25,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/rectangle" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:background="#7D233F"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="60dp"
@@ -40,7 +50,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/nanum_square_round_b"
             android:text="솜솜픽 Best"
-            android:textColor="#744242"
+            android:textColor="#FFFFFF"
             android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
