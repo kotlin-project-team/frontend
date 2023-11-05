@@ -51,6 +51,9 @@
         <activity
             android:name=".PostCreateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".PostUpdateActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 
 </manifest>
