@@ -16,6 +16,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/rectangle" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="#7D233F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="35dp"
@@ -33,7 +43,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/nanum_square_round_b"
         android:text="글 쓰기"
-        android:textColor="#744242"
+        android:textColor="#FFFFFF"
         android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,10 +88,10 @@
         android:layout_height="55dp"
         android:layout_marginTop="24dp"
         android:background="#FFFFFF"
-        android:hint="제목"
+        android:hint="   제목"
         android:inputType="text"
         android:textColor="#000000"
-        android:textColorHint="#744242"
+        android:textColorHint="#8F8F8F"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,10 +102,10 @@
         android:layout_width="0dp"
         android:layout_height="165dp"
         android:background="#FFFFFF"
-        android:hint="내용을 입력하세요"
+        android:hint="   내용을 입력하세요"
         android:inputType="text|textMultiLine"
         android:textColor="#000000"
-        android:textColorHint="#744242"
+        android:textColorHint="#8F8F8F"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
