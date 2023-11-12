@@ -9,7 +9,7 @@ import java.io.Serializable
 
 @Entity(tableName = "post_table")
 @JsonClass(generateAdapter = true)
-data class PostData(
+data class PostResponse(
     @field:Json(name = "id")
     @PrimaryKey(autoGenerate = true)
     val id: Int,

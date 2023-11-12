@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.api.ApiObject
 import com.study.dongamboard.db.PostDB
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 import com.study.dongamboard.model.request.PostRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,13 +14,13 @@ import kotlinx.coroutines.launch
 
 class PostUpdateActivity : AppCompatActivity() {
 
-    lateinit var post: PostData
+    lateinit var post: PostResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
-        post = intent.getSerializableExtra("postData") as PostData
+        post = intent.getSerializableExtra("postData") as PostResponse
 
         val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
         val etPostCreateContent = findViewById<EditText>(R.id.etPostCreateContent)

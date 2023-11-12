@@ -9,9 +9,9 @@ import com.study.dongamboard.api.ApiObject
 import com.study.dongamboard.converter.CommentListTypeConverter
 import com.study.dongamboard.converter.PostListTypeConverter
 import com.study.dongamboard.dao.PostDAO
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 
-@Database(entities = [PostData::class], version = 1, exportSchema = false)
+@Database(entities = [PostResponse::class], version = 1, exportSchema = false)
 @TypeConverters(
     CommentListTypeConverter::class,
     PostListTypeConverter::class

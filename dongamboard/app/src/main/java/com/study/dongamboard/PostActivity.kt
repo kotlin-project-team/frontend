@@ -20,7 +20,7 @@ import com.study.dongamboard.api.ApiObject
 import com.study.dongamboard.db.CommentDB
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.CommentData
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,7 +44,7 @@ class PostActivity : AppCompatActivity() {
             setDisplayShowTitleEnabled(false)
         }
 
-        post = intent.getSerializableExtra("postData") as PostData
+        post = intent.getSerializableExtra("postData") as PostResponse
         reloadPost()
 
         postDB = PostDB.getInstance(this)!!

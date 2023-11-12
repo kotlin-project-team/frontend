@@ -1,6 +1,6 @@
 package com.study.dongamboard.api
 
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 import com.study.dongamboard.model.request.PostRequest
 import retrofit2.http.Body
 import retrofit2.http.DELETE

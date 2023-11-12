@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
 import android.widget.TextView
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 
-class PostAdapter(private val context: Context, val resId: Int, val datas: MutableList<PostData>) :
-ArrayAdapter<PostData>(context, resId) {
+class PostAdapter(private val context: Context, val resId: Int, val datas: MutableList<PostResponse>) :
+ArrayAdapter<PostResponse>(context, resId) {
 
     override fun getCount(): Int {
         return datas.size
@@ -37,7 +36,6 @@ ArrayAdapter<PostData>(context, resId) {
 
         return convertView
     }
-
 }
 
 
