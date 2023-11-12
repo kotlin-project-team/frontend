@@ -13,12 +13,14 @@ import kotlinx.coroutines.launch
 
 class PostCreateActivity : AppCompatActivity() {
 
+    lateinit var category: String
     lateinit var postDB : PostDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
+        category = intent.getStringExtra("postCategory") as String
         postDB = PostDB.getInstance(this)!!
 
         val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)

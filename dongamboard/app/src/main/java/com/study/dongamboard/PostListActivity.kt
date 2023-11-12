@@ -46,6 +46,7 @@ class PostListActivity : AppCompatActivity() {
         val ivPostCreate = findViewById<ImageView>(R.id.ivPostCreate)
         ivPostCreate.setOnClickListener {
             val intent = Intent(this, PostCreateActivity::class.java)
+            intent.putExtra("postCategory", category)
             startActivity(intent)
         }
 
