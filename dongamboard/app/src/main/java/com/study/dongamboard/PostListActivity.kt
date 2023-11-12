@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class PostListActivity : AppCompatActivity() {
 
+    lateinit var category: String
     lateinit var postAdapter: PostAdapter
     lateinit var lvPost: ListView
     lateinit var postDB: PostDB
@@ -24,6 +26,10 @@ class PostListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
+
+        category = intent.getStringExtra("postCategory") as String
+        val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
+        tvPostListCategory.setText(category)
 
         postDB = PostDB.getInstance(this)!!
 
