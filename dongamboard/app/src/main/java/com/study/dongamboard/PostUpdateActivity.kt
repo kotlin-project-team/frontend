@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.study.dongamboard.api.ApiObject
+import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.PostResponse
 import com.study.dongamboard.model.request.PostRequest
@@ -34,8 +34,9 @@ class PostUpdateActivity : AppCompatActivity() {
                 val postRequest = PostRequest(
                     etPostCreateTitle.text.toString(),
                     etPostCreateContent.text.toString(),
-                    post.category!!)
-                ApiObject.getRetrofitAPIService.updatePost(post.id, postRequest)
+                    post.category!!
+                )
+                APIObject.getRetrofitAPIService.updatePost(post.id, postRequest)
                 finish()
             }
         }

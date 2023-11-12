@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.study.dongamboard.api.ApiObject
+import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.converter.CommentListTypeConverter
 import com.study.dongamboard.converter.PostListTypeConverter
 import com.study.dongamboard.dao.PostDAO
@@ -33,7 +33,7 @@ abstract class PostDB : RoomDatabase() {
                         PostDB::class.java,
                         "post.db"
                     )
-                        .addTypeConverter(CommentListTypeConverter(ApiObject.moshi))
+                        .addTypeConverter(CommentListTypeConverter(APIObject.moshi))
                         .build()
                 }
             return instance

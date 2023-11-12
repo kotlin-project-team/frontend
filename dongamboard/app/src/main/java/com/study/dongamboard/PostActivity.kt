@@ -16,7 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.study.dongamboard.adapter.CommentAdapter
-import com.study.dongamboard.api.ApiObject
+import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.CommentDB
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.CommentData
@@ -94,7 +94,7 @@ class PostActivity : AppCompatActivity() {
         val ivPostLike = findViewById<ImageView>(R.id.ivPostLike)
         ivPostLike.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                ApiObject.getRetrofitAPIService.clickPostLike(post.id)
+                APIObject.getRetrofitAPIService.clickPostLike(post.id)
                 reloadPost()
             }
         }
@@ -108,7 +108,7 @@ class PostActivity : AppCompatActivity() {
         val tvPostCategory = findViewById<TextView>(R.id.tvPostCategory)
 
         CoroutineScope(Dispatchers.Main).launch {
-            post = ApiObject.getRetrofitAPIService.getPostById(post.id)
+            post = APIObject.getRetrofitAPIService.getPostById(post.id)
             tvPostTitle.text = post.title
             tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
             tvCmtCnt.text = "[댓글 " + "0" + "]"
@@ -151,7 +151,7 @@ class PostActivity : AppCompatActivity() {
             }
             R.id.miDeletePost->{
                 CoroutineScope(Dispatchers.IO).launch {
-                    ApiObject.getRetrofitAPIService.deletePost(post.id)
+                    APIObject.getRetrofitAPIService.deletePost(post.id)
                     // TODO: 댓글 삭제 요청 추가
                     finish()
                 }

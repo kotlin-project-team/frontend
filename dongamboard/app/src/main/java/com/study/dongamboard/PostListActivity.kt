@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
@@ -52,7 +53,7 @@ class PostListActivity : AppCompatActivity() {
 
     private fun readAllPosts() {
         CoroutineScope(Dispatchers.Main).launch {
-            postList = ApiObject.getRetrofitAPIService.getAllPost() as ArrayList<PostData>
+            postList = APIObject.getRetrofitAPIService.getAllPost(category) as ArrayList<PostResponse>
             postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
                 postList as MutableList<PostResponse>
             )
