@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.study.dongamboard.api.ApiObject
+import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.request.PostRequest
 import kotlinx.coroutines.CoroutineScope
@@ -30,8 +30,8 @@ class PostCreateActivity : AppCompatActivity() {
                 val postRequest = PostRequest(
                     etPostCreateTitle.text.toString(),
                     etPostCreateContent.text.toString(),
-                    "자유게시판")
-                ApiObject.getRetrofitAPIService.createPost(postRequest)
+                    category)
+                APIObject.getRetrofitAPIService.createPost(postRequest)
             }
             finish()
         }
