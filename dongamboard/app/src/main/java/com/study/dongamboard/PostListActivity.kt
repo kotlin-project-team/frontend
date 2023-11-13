@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
-import com.study.dongamboard.api.ApiObject
+import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class PostListActivity : AppCompatActivity() {
     lateinit var postAdapter: PostAdapter
     lateinit var lvPost: ListView
     lateinit var postDB: PostDB
-    lateinit var postList: ArrayList<PostData>
+    lateinit var postList: ArrayList<PostResponse>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class PostListActivity : AppCompatActivity() {
         postDB = PostDB.getInstance(this)!!
 
         lvPost = findViewById<ListView>(R.id.lvPost)
-        postList = arrayListOf<PostData>()
+        postList = arrayListOf<PostResponse>()
         readAllPosts()
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
@@ -52,9 +53,9 @@ class PostListActivity : AppCompatActivity() {
 
     private fun readAllPosts() {
         CoroutineScope(Dispatchers.Main).launch {
-            postList = ApiObject.getRetrofitAPIService.getAllPost() as ArrayList<PostData>
+            postList = APIObject.getRetrofitAPIService.getAllPost(category) as ArrayList<PostResponse>
             postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
-                postList as MutableList<PostData>
+                postList as MutableList<PostResponse>
             )
             postAdapter.notifyDataSetChanged()
             lvPost.adapter = postAdapter

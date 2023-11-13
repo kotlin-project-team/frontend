@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 
 class BestActivity : AppCompatActivity() {
 
@@ -13,11 +13,11 @@ class BestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_best)
 
-        var postList : ArrayList<PostData> = arrayListOf<PostData>()
+        var postList : ArrayList<PostResponse> = arrayListOf<PostResponse>()
         postList.apply {
-            add(PostData(99997, 20200982, "베스트1", "베스트1 예제", "일반", 0, 0))
-            add(PostData(99998, 20200000, "베스트2", "베스트2 게시게시", "일반", 1, 0))
-            add(PostData(99999, 20200000, "베스트3", "베스트3 게시게시물입니다. 안녕", "일반", 3, 0))
+            add(PostResponse(99997, 20200982, "베스트1", "베스트1 예제", "일반", 0, 0))
+            add(PostResponse(99998, 20200000, "베스트2", "베스트2 게시게시", "일반", 1, 0))
+            add(PostResponse(99999, 20200000, "베스트3", "베스트3 게시게시물입니다. 안녕", "일반", 3, 0))
         }
 
         postList.forEachIndexed { index, post ->

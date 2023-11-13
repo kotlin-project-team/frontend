@@ -6,24 +6,24 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.study.dongamboard.model.PostData
+import com.study.dongamboard.model.PostResponse
 
 @Dao
 interface PostDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPost(post: PostData)
+    fun insertPost(post: PostResponse)
 
     @Update
-    fun updatePost(post: PostData)
+    fun updatePost(post: PostResponse)
 
     @Delete
-    fun deletePost(post: PostData)
+    fun deletePost(post: PostResponse)
 
     @Query("SELECT * FROM post_table")
-    fun findAll(): List<PostData>
+    fun findAll(): List<PostResponse>
 
     @Query("SELECT * FROM post_table WHERE id = :id")
-    fun findPostById(id: Int): PostData
+    fun findPostById(id: Int): PostResponse
 
 }
