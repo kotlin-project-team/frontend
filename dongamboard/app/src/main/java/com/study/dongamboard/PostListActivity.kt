@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class PostListActivity : AppCompatActivity() {
 
+    lateinit var category: String
     lateinit var postAdapter: PostAdapter
     lateinit var lvPost: ListView
     lateinit var postDB: PostDB
@@ -25,6 +26,10 @@ class PostListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
+
+        category = intent.getStringExtra("postCategory") as String
+        val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
+        tvPostListCategory.setText(category)
 
         postDB = PostDB.getInstance(this)!!
 
@@ -41,6 +46,7 @@ class PostListActivity : AppCompatActivity() {
         val ivPostCreate = findViewById<ImageView>(R.id.ivPostCreate)
         ivPostCreate.setOnClickListener {
             val intent = Intent(this, PostCreateActivity::class.java)
+            intent.putExtra("postCategory", category)
             startActivity(intent)
         }
 
