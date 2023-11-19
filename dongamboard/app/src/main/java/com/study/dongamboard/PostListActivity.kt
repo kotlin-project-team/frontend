@@ -61,12 +61,15 @@ class PostListActivity : AppCompatActivity() {
 
     private fun readAllPosts() {
         CoroutineScope(Dispatchers.Main).launch {
-            postList = APIObject.getRetrofitAPIService.getAllPost(category) as ArrayList<PostResponse>
-            postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
-                postList as MutableList<PostResponse>
-            )
-            postAdapter.notifyDataSetChanged()
-            lvPost.adapter = postAdapter
+            val response = APIObject.getRetrofitAPIService.getAllPost(displayPageItemSize, nowPage - 1, category)
+            if (response.code == ResponseStatusType.SUCCESS.code) {
+                postList = response.result as ArrayList<PostResponse>
+                postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
+                    postList as MutableList<PostResponse>
+                )
+                postAdapter.notifyDataSetChanged()
+                lvPost.adapter = postAdapter
+            }
         }
     }
 
