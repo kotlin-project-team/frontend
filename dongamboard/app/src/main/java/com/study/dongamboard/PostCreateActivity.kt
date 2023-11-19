@@ -7,20 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.request.PostRequest
+import com.study.dongamboard.type.BoardCategoryType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PostCreateActivity : AppCompatActivity() {
 
-    lateinit var category: String
+    lateinit var category: BoardCategoryType
     lateinit var postDB : PostDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
-        category = intent.getStringExtra("postCategory") as String
+        category = intent.getSerializableExtra("postCategory") as BoardCategoryType
         postDB = PostDB.getInstance(this)!!
 
         val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)

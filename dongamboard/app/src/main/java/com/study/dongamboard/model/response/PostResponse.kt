@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.study.dongamboard.model.CommentData
+import com.study.dongamboard.type.BoardCategoryType
 import java.io.Serializable
 
 @Entity(tableName = "post_table")
@@ -28,7 +30,7 @@ data class PostResponse(
 
     @field:Json(name = "category")
     @ColumnInfo
-    val category: String? = null,
+    val category: BoardCategoryType? = null,
 
     @field:Json(name = "likes")
     @ColumnInfo

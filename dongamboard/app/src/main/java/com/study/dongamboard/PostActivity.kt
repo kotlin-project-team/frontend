@@ -113,7 +113,7 @@ class PostActivity : AppCompatActivity() {
             tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
             tvCmtCnt.text = "[댓글 " + "0" + "]"
             tvPostContent.text = post.content
-            tvPostCategory.text = post.category
+            tvPostCategory.text = post.category.toString()
         }
     }
 

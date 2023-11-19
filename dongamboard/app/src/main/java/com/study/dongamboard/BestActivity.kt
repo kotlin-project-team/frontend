@@ -16,9 +16,9 @@ class BestActivity : AppCompatActivity() {
 
         var postList : ArrayList<PostResponse> = arrayListOf<PostResponse>()
         postList.apply {
-            add(PostResponse(99997, 20200982, "베스트1", "베스트1 예제", "일반", 0, 0))
-            add(PostResponse(99998, 20200000, "베스트2", "베스트2 게시게시", "일반", 1, 0))
-            add(PostResponse(99999, 20200000, "베스트3", "베스트3 게시게시물입니다. 안녕", "일반", 3, 0))
+            add(PostResponse(99997, 20200982, "베스트1", "베스트1 예제", BoardCategoryType.자유게시판, 0, 0))
+            add(PostResponse(99998, 20200000, "베스트2", "베스트2 게시게시", BoardCategoryType.자유게시판, 1, 0))
+            add(PostResponse(99999, 20200000, "베스트3", "베스트3 게시게시물입니다. 안녕", BoardCategoryType.자유게시판, 3, 0))
         }
 
         postList.forEachIndexed { index, post ->

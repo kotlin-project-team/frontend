@@ -10,14 +10,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
+import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.ResponseStatusType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PostListActivity : AppCompatActivity() {
 
-    lateinit var category: String
+    lateinit var category: BoardCategoryType
     lateinit var postAdapter: PostAdapter
     lateinit var lvPost: ListView
     lateinit var postDB: PostDB
@@ -27,9 +29,9 @@ class PostListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
 
-        category = intent.getStringExtra("postCategory") as String
+        category = intent.getSerializableExtra("postCategory") as BoardCategoryType
         val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
-        tvPostListCategory.setText(category)
+        tvPostListCategory.setText(category.toString())
 
         postDB = PostDB.getInstance(this)!!
 
