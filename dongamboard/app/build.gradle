@@ -63,4 +63,6 @@ dependencies {
     // Refresh
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
+    //LakuePagingButton Library
+    implementation 'com.github.lakue119:LakuePagingButton:1.0.0'
 }
