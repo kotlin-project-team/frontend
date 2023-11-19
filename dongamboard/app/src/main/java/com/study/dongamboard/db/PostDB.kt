@@ -9,7 +9,7 @@ import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.converter.CommentListTypeConverter
 import com.study.dongamboard.converter.PostListTypeConverter
 import com.study.dongamboard.dao.PostDAO
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 
 @Database(entities = [PostResponse::class], version = 1, exportSchema = false)
 @TypeConverters(

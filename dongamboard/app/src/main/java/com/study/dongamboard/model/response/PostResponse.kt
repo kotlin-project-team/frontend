@@ -1,4 +1,4 @@
-package com.study.dongamboard.model
+package com.study.dongamboard.model.response
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -5,7 +5,7 @@ import androidx.room.TypeConverter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 
 @ProvidedTypeConverter
 class PostListTypeConverter(private val moshi: Moshi) {

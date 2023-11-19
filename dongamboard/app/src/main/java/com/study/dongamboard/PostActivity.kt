@@ -20,7 +20,7 @@ import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.CommentDB
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.CommentData
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

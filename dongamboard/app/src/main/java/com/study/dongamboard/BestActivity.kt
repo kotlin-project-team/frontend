@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
+import com.study.dongamboard.type.BoardCategoryType
 
 class BestActivity : AppCompatActivity() {
 

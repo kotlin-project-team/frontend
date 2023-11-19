@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 
 @Dao
 interface PostDAO {
