@@ -2,11 +2,14 @@ package com.study.dongamboard
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.lakue.pagingbutton.LakuePagingButton
+import com.lakue.pagingbutton.OnPageSelectListener
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
@@ -23,6 +26,10 @@ class PostListActivity : AppCompatActivity() {
     lateinit var postDB: PostDB
     lateinit var postList: ArrayList<PostResponse>
 
+    val displayPageItemSize = 5
+    var maxPageSize = 1
+    var nowPage = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
@@ -35,7 +42,9 @@ class PostListActivity : AppCompatActivity() {
 
         lvPost = findViewById<ListView>(R.id.lvPost)
         postList = arrayListOf<PostResponse>()
-        readAllPosts()
+
+        setPager()
+        readAllPostsByPage()
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
             val intent = Intent(this, PostActivity::class.java)
@@ -48,16 +57,30 @@ class PostListActivity : AppCompatActivity() {
             val intent = Intent(this, PostCreateActivity::class.java)
             intent.putExtra("postCategory", category)
             startActivity(intent)
+            nowPage = 1
         }
 
         var swipe = findViewById<SwipeRefreshLayout>(R.id.swipePostlistLayout)
         swipe.setOnRefreshListener {
-            readAllPosts()
+            readAllPostsByPage()
             swipe.isRefreshing = false
         }
     }
 
-    private fun readAllPosts() {
+    private fun setPager() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = APIObject.getRetrofitAPIService.getAllPost(0, 0, category)
+            if (response.code == ResponseStatusType.SUCCESS.code) {
+                maxPageSize = response.result.size / displayPageItemSize
+                if (response.result.size % displayPageItemSize > 0) {
+                    maxPageSize++
+                }
+                paging()
+            }
+        }
+    }
+
+    private fun readAllPostsByPage() {
         CoroutineScope(Dispatchers.Main).launch {
             postList = APIObject.getRetrofitAPIService.getAllPost(category) as ArrayList<PostResponse>
             postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
@@ -68,8 +91,42 @@ class PostListActivity : AppCompatActivity() {
         }
     }
 
+    private fun paging() {
+        val btnLpbPager = findViewById<LakuePagingButton>(R.id.btnLpbPager)
+        var displayPageSize = 5
+
+        if (maxPageSize < 5) {
+            displayPageSize = maxPageSize
+        }
+        btnLpbPager.setPageItemCount(displayPageSize)
+        btnLpbPager.addBottomPageButton(maxPageSize, nowPage)
+
+        btnLpbPager.setOnPageSelectListener(object : OnPageSelectListener {
+            override fun onPageBefore(clicked: Int) {
+                nowPage = clicked
+                btnLpbPager.addBottomPageButton(maxPageSize, clicked)
+                readAllPostsByPage()
+                Log.d("nowPage", nowPage.toString())
+            }
+
+            override fun onPageCenter(clicked: Int) {
+                nowPage = clicked
+                readAllPostsByPage()
+                Log.d("nowPage", nowPage.toString())
+            }
+
+            override fun onPageNext(clicked: Int) {
+                nowPage = clicked
+                btnLpbPager.addBottomPageButton(maxPageSize, clicked)
+                readAllPostsByPage()
+                Log.d("nowPage", nowPage.toString())
+            }
+        })
+    }
+
     override fun onResume() {
-        readAllPosts()
+        readAllPostsByPage()
+        setPager()
         super.onResume()
     }
 
