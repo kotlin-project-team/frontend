@@ -10,14 +10,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
+import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.ResponseStatusType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PostListActivity : AppCompatActivity() {
 
-    lateinit var category: String
+    lateinit var category: BoardCategoryType
     lateinit var postAdapter: PostAdapter
     lateinit var lvPost: ListView
     lateinit var postDB: PostDB
@@ -27,9 +29,9 @@ class PostListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
 
-        category = intent.getStringExtra("postCategory") as String
+        category = intent.getSerializableExtra("postCategory") as BoardCategoryType
         val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
-        tvPostListCategory.setText(category)
+        tvPostListCategory.setText(category.toString())
 
         postDB = PostDB.getInstance(this)!!
 
@@ -59,12 +61,15 @@ class PostListActivity : AppCompatActivity() {
 
     private fun readAllPosts() {
         CoroutineScope(Dispatchers.Main).launch {
-            postList = APIObject.getRetrofitAPIService.getAllPost(category) as ArrayList<PostResponse>
-            postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
-                postList as MutableList<PostResponse>
-            )
-            postAdapter.notifyDataSetChanged()
-            lvPost.adapter = postAdapter
+            val response = APIObject.getRetrofitAPIService.getAllPost(displayPageItemSize, nowPage - 1, category)
+            if (response.code == ResponseStatusType.SUCCESS.code) {
+                postList = response.result as ArrayList<PostResponse>
+                postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
+                    postList as MutableList<PostResponse>
+                )
+                postAdapter.notifyDataSetChanged()
+                lvPost.adapter = postAdapter
+            }
         }
     }
 

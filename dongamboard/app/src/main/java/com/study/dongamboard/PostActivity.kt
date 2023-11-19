@@ -20,7 +20,7 @@ import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.CommentDB
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.CommentData
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -113,7 +113,7 @@ class PostActivity : AppCompatActivity() {
             tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
             tvCmtCnt.text = "[댓글 " + "0" + "]"
             tvPostContent.text = post.content
-            tvPostCategory.text = post.category
+            tvPostCategory.text = post.category.toString()
         }
     }
 

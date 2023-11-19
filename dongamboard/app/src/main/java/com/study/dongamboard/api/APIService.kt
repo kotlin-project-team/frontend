@@ -1,7 +1,9 @@
 package com.study.dongamboard.api
 
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
+import com.study.dongamboard.model.response.APIResponse
+import com.study.dongamboard.type.BoardCategoryType
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET

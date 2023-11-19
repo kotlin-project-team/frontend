@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

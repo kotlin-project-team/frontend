@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.study.dongamboard.type.BoardCategoryType
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,14 +29,14 @@ class MainActivity : AppCompatActivity() {
         val btnBoardGeneral = findViewById<Button>(R.id.btnBoardGeneral)
         btnBoardGeneral.setOnClickListener {
             val intent = Intent(this, PostListActivity::class.java)
-            intent.putExtra("postCategory", "자유게시판")
+            intent.putExtra("postCategory", BoardCategoryType.자유게시판)
             startActivity(intent)
         }
 
         val btnBoardMarket = findViewById<Button>(R.id.btnBoardMarket)
         btnBoardMarket.setOnClickListener {
             val intent = Intent(this, PostListActivity::class.java)
-            intent.putExtra("postCategory", "장터게시판")
+            intent.putExtra("postCategory", BoardCategoryType.장터게시판)
             startActivity(intent)
         }
 

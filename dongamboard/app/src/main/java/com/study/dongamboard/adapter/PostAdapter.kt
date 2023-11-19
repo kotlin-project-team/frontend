@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.study.dongamboard.model.PostResponse
+import com.study.dongamboard.model.response.PostResponse
 
 class PostAdapter(private val context: Context, val resId: Int, val datas: MutableList<PostResponse>) :
 ArrayAdapter<PostResponse>(context, resId) {
