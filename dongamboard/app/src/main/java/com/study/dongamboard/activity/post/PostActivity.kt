@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
@@ -15,6 +16,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onSuccess
+import com.study.dongamboard.R
 import com.study.dongamboard.adapter.CommentAdapter
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.CommentDB
@@ -108,12 +112,18 @@ class PostActivity : AppCompatActivity() {
         val tvPostCategory = findViewById<TextView>(R.id.tvPostCategory)
 
         CoroutineScope(Dispatchers.Main).launch {
-            post = APIObject.getRetrofitAPIService.getPostById(post.id)
-            tvPostTitle.text = post.title
-            tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
-            tvCmtCnt.text = "[댓글 " + "0" + "]"
-            tvPostContent.text = post.content
-            tvPostCategory.text = post.category.toString()
+            val response = APIObject.getRetrofitAPIService.getPostById(post.id)
+            response.onSuccess {
+                post = data
+                tvPostTitle.text = post.title
+                tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
+                tvCmtCnt.text = "[댓글 " + "0" + "]"
+                tvPostContent.text = post.content
+                tvPostCategory.text = post.category.toString()
+            }.onError {
+                Log.d("statusCode", statusCode.toString())
+                Log.d("error", errorBody.toString())
+            }
         }
     }
 
@@ -149,7 +159,7 @@ class PostActivity : AppCompatActivity() {
                     reloadPost()
                 }
             }
-            R.id.miDeletePost->{
+            R.id.miDeletePost ->{
                 CoroutineScope(Dispatchers.IO).launch {
                     APIObject.getRetrofitAPIService.deletePost(post.id)
                     // TODO: 댓글 삭제 요청 추가
