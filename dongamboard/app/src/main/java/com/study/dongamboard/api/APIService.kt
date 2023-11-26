@@ -3,7 +3,7 @@ package com.study.dongamboard.api
 import com.skydoves.sandwich.ApiResponse
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
-import com.study.dongamboard.model.response.APIResponse
+import com.study.dongamboard.model.request.UserRequest
 import com.study.dongamboard.type.BoardCategoryType
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -34,4 +34,7 @@ interface APIService {
 
     @POST("/api/post/like/{postId}")
     suspend fun clickPostLike(@Path(value = "postId") id: Int)
+
+    @POST("/api/user")
+    suspend fun createUser(@Body userRequest: UserRequest): ApiResponse<Unit>
 }
