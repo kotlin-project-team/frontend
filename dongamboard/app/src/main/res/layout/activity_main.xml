@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E5D1EE"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <RelativeLayout
         android:id="@+id/android_sma"
@@ -184,12 +184,7 @@
                     android:text="장터게시판"
                     app:layout_constraintStart_toEndOf="@+id/btnBoardGeneral"
                     app:layout_constraintTop_toBottomOf="@+id/textTalk" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </RelativeLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
