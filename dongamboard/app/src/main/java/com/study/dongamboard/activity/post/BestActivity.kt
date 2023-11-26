@@ -1,10 +1,11 @@
-package com.study.dongamboard
+package com.study.dongamboard.activity.post
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.study.dongamboard.R
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.type.BoardCategoryType
 
@@ -35,7 +36,5 @@ class BestActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
     }
-
 }

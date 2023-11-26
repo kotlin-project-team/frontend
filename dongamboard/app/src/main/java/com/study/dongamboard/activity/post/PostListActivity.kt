@@ -1,4 +1,4 @@
-package com.study.dongamboard
+package com.study.dongamboard.activity.post
 
 import android.content.Intent
 import android.os.Bundle

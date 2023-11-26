@@ -1,4 +1,4 @@
-package com.study.dongamboard
+package com.study.dongamboard.activity.notice
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.study.dongamboard.R
 import com.study.dongamboard.adapter.NoticeAdapter
 import com.study.dongamboard.db.NoticeDB
 import com.study.dongamboard.model.NoticeData
@@ -39,7 +40,6 @@ class NoticeListActivity : AppCompatActivity() {
             val intent = Intent(this, NoticeCreateActivity::class.java)
             startActivity(intent)
         }
-
     }
 
     private fun readAllNotices() {
@@ -63,6 +63,4 @@ class NoticeListActivity : AppCompatActivity() {
         NoticeDB.destroyInstance()
         super.onDestroy()
     }
-
-
 }

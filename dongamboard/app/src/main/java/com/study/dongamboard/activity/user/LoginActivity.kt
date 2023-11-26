@@ -1,4 +1,4 @@
-package com.study.dongamboard
+package com.study.dongamboard.activity.user
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.study.dongamboard.R
 
 class LoginActivity : AppCompatActivity() {
 
@@ -27,5 +28,4 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }
