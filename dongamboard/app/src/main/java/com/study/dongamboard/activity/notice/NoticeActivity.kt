@@ -1,8 +1,9 @@
-package com.study.dongamboard
+package com.study.dongamboard.activity.notice
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.study.dongamboard.R
 import com.study.dongamboard.model.NoticeData
 
 class NoticeActivity : AppCompatActivity() {
@@ -18,7 +19,5 @@ class NoticeActivity : AppCompatActivity() {
 
         tvNoticeTitle.text = notice?.title
         tvNoticeContent.text = notice?.content
-
     }
-
 }

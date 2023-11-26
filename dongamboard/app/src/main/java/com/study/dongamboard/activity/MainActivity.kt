@@ -1,4 +1,4 @@
-package com.study.dongamboard
+package com.study.dongamboard.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.study.dongamboard.R
+import com.study.dongamboard.activity.notice.NoticeListActivity
+import com.study.dongamboard.activity.post.BestActivity
+import com.study.dongamboard.activity.post.PostListActivity
+import com.study.dongamboard.activity.user.LoginActivity
 import com.study.dongamboard.type.BoardCategoryType
 
 class MainActivity : AppCompatActivity() {

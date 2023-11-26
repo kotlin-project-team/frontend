@@ -1,4 +1,4 @@
-package com.study.dongamboard
+package com.study.dongamboard.activity.post
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lakue.pagingbutton.LakuePagingButton
 import com.lakue.pagingbutton.OnPageSelectListener
+import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onSuccess
+import com.study.dongamboard.R
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.type.BoardCategoryType
-import com.study.dongamboard.type.ResponseStatusType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,12 +74,15 @@ class PostListActivity : AppCompatActivity() {
     private fun setPager() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllPost(0, 0, category)
-            if (response.code == ResponseStatusType.SUCCESS.code) {
-                maxPageSize = response.result.size / displayPageItemSize
-                if (response.result.size % displayPageItemSize > 0) {
+            response.onSuccess {
+                maxPageSize = data.size / displayPageItemSize
+                if (data.size % displayPageItemSize > 0) {
                     maxPageSize++
                 }
                 paging()
+            }.onError {
+                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
+                // TODO: status code에 따른 처리
             }
         }
     }
@@ -85,13 +90,16 @@ class PostListActivity : AppCompatActivity() {
     private fun readAllPostsByPage() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllPost(displayPageItemSize, nowPage - 1, category)
-            if (response.code == ResponseStatusType.SUCCESS.code) {
-                postList = response.result as ArrayList<PostResponse>
+            response.onSuccess {
+                postList = data as ArrayList<PostResponse>
                 postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
                     postList as MutableList<PostResponse>
                 )
                 postAdapter.notifyDataSetChanged()
                 lvPost.adapter = postAdapter
+            }.onError {
+                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
+                // TODO: status code에 따른 처리
             }
         }
     }
@@ -111,20 +119,17 @@ class PostListActivity : AppCompatActivity() {
                 nowPage = clicked
                 btnLpbPager.addBottomPageButton(maxPageSize, clicked)
                 readAllPostsByPage()
-                Log.d("nowPage", nowPage.toString())
             }
 
             override fun onPageCenter(clicked: Int) {
                 nowPage = clicked
                 readAllPostsByPage()
-                Log.d("nowPage", nowPage.toString())
             }
 
             override fun onPageNext(clicked: Int) {
                 nowPage = clicked
                 btnLpbPager.addBottomPageButton(maxPageSize, clicked)
                 readAllPostsByPage()
-                Log.d("nowPage", nowPage.toString())
             }
         })
     }

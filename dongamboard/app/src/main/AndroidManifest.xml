@@ -17,7 +17,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
@@ -28,41 +28,41 @@
         </activity>
 
         <activity
-            android:name=".UserActivity"
+            android:name=".activity.user.UserActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.user.LoginActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".JoinActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-
-        <activity
-            android:name=".NoticeActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".NoticeListActivity"
-            android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".NoticeCreateActivity"
+            android:name=".activity.user.JoinActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
 
         <activity
-            android:name=".BestActivity"
+            android:name=".activity.notice.NoticeActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".activity.notice.NoticeListActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".activity.notice.NoticeCreateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
 
         <activity
-            android:name=".PostActivity"
+            android:name=".activity.post.BestActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+
+        <activity
+            android:name=".activity.post.PostActivity"
             android:theme="@style/Theme.Design.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".PostListActivity"
+            android:name=".activity.post.PostListActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".PostCreateActivity"
+            android:name=".activity.post.PostCreateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".PostUpdateActivity"
+            android:name=".activity.post.PostUpdateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 

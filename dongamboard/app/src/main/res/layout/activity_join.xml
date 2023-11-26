@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,6 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:background="#7D233F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="60dp"
@@ -38,7 +45,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nanum_square_round_b"
                 android:text="회원가입"
-                android:textColor="#744242"
+                android:textColor="#FFFFFF"
                 android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -63,20 +70,19 @@
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="이메일"
+                        android:text="학번"
                         android:textColor="#000000" />
 
                     <EditText
-                        android:id="@+id/etEmail"
+                        android:id="@+id/etStuId"
                         android:layout_width="312dp"
                         android:layout_height="50dp"
                         android:background="@android:drawable/editbox_background"
                         android:ems="10"
-                        android:hint="학번@mail.com"
-                        android:inputType="textEmailAddress"
+                        android:hint="학번 8자리"
+                        android:inputType="number"
                         android:textColor="#000000"
                         android:textColorHint="#A0A0A0" />
-
                 </TableRow>
 
                 <TableRow
@@ -101,7 +107,6 @@
                         android:inputType="textPassword"
                         android:textColor="#000000"
                         android:textColorHint="#A0A0A0" />
-
                 </TableRow>
 
                 <TableRow
@@ -117,7 +122,7 @@
                         android:textColor="#000000" />
 
                     <EditText
-                        android:id="@+id/editTextText3"
+                        android:id="@+id/etNickname"
                         android:layout_width="312dp"
                         android:layout_height="50dp"
                         android:background="@android:drawable/editbox_background"
@@ -127,31 +132,6 @@
                         android:textColor="#000000"
                         android:textColorHint="#A0A0A0" />
                 </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|center_horizontal|center_vertical">
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="휴대전화"
-                        android:textColor="#000000" />
-
-                    <EditText
-                        android:id="@+id/editTextPhone"
-                        android:layout_width="312dp"
-                        android:layout_height="50dp"
-                        android:background="@android:drawable/editbox_background"
-                        android:ems="10"
-                        android:hint="전화번호를 입력하세요"
-                        android:inputType="phone"
-                        android:textColor="#000000"
-                        android:textColorHint="#A0A0A0" />
-
-                </TableRow>
             </TableLayout>
 
             <Button
@@ -159,12 +139,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
-                android:text="시작하기"
+                android:backgroundTint="#7D233F"
+                android:text="가입하기"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
