@@ -46,6 +46,9 @@
         <activity
             android:name=".activity.notice.NoticeCreateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".activity.notice.NoticeUpdateActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
 
         <activity
             android:name=".activity.post.BestActivity"
@@ -65,5 +68,4 @@
             android:name=".activity.post.PostUpdateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
     </application>
-
 </manifest>

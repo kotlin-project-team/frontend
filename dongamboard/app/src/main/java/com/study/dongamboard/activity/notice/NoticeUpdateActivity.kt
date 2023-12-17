@@ -8,37 +8,42 @@ import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.NoticeDB
 import com.study.dongamboard.model.request.NoticeRequest
+import com.study.dongamboard.model.response.NoticeResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoticeCreateActivity : AppCompatActivity() {
+class NoticeUpdateActivity : AppCompatActivity() {
 
-    lateinit var noticeDB : NoticeDB
+    lateinit var notice: NoticeResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
-        noticeDB = NoticeDB.getInstance(this)!!
+        notice = intent.getSerializableExtra("noticeData") as NoticeResponse
 
-        // TODO: 추후 title 추가
+        // TODO: title 추가 시 설정
 //        val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
         val etPostCreateContent = findViewById<EditText>(R.id.etPostCreateContent)
 
+//        etPostCreateTitle.setText(notice.title)
+        etPostCreateContent.setText(notice.content)
+
         val ivCreatePostBtn = findViewById<ImageView>(R.id.ivCreatePostBtn)
-        ivCreatePostBtn.setOnClickListener{
+        ivCreatePostBtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val noticeRequest = NoticeRequest(
-                    etPostCreateContent.text.toString())
-                APIObject.getRetrofitAPIService.createNotice(noticeRequest)
+                    etPostCreateContent.text.toString()
+                )
+                APIObject.getRetrofitAPIService.updateNotice(notice.id, noticeRequest)
+                finish()
             }
-            finish()
         }
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         NoticeDB.destroyInstance()
+        super.onDestroy()
     }
 }

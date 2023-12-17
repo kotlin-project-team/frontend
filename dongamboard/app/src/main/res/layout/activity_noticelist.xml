@@ -31,6 +31,7 @@
                 app:srcCompat="@drawable/rectangle" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout6"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:background="#7D233F"
@@ -59,28 +60,41 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gotoback" />
 
-            <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="531dp"
-                android:layout_marginTop="16dp"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeNoticelistLayout"
+                android:layout_width="393dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="112dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.333"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                app:layout_constraintVertical_bias="0.047">
+                app:layout_constraintTop_toBottomOf="@+id/imageView10"
+                app:layout_constraintVertical_bias="0.584">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="531dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.333"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                    app:layout_constraintVertical_bias="0.047">
 
-                    <ListView
-                        android:id="@+id/lvNotice"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="533dp" />
-                </LinearLayout>
-            </ScrollView>
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ListView
+                            android:id="@+id/lvNotice"
+                            android:layout_width="match_parent"
+                            android:layout_height="448dp" />
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -100,6 +114,15 @@
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/button" />
+
+            <com.lakue.pagingbutton.LakuePagingButton
+                android:id="@+id/btnLpbPager"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
