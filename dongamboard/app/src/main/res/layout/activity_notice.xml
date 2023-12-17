@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#7D233F">
 
-
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
@@ -25,6 +24,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarNotice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7D233F"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <TextView
             android:id="@+id/textView"
@@ -99,7 +109,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNoticeTitle"
             app:srcCompat="@drawable/nline" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
