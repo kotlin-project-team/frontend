@@ -1,13 +1,16 @@
 package com.study.dongamboard.activity.notice
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.R
+import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.db.NoticeDB
-import com.study.dongamboard.model.NoticeData
+import com.study.dongamboard.model.request.NoticeRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class NoticeCreateActivity : AppCompatActivity() {
 
@@ -19,26 +22,23 @@ class NoticeCreateActivity : AppCompatActivity() {
 
         noticeDB = NoticeDB.getInstance(this)!!
 
-        val createNoticeRunnable = Runnable {
-            val newNotice = NoticeData(
-                0,
-                findViewById<EditText>(R.id.etPostCreateTitle).text.toString(),
-                findViewById<EditText>(R.id.etPostCreateContent).text.toString(),
-                "일반")
-            noticeDB.noticeDao().insertNotice(newNotice)
-            Log.d("InsertedNoticeList", noticeDB.noticeDao().findAll().toString())
-        }
+        // TODO: 추후 title 추가
+//        val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
+        val etPostCreateContent = findViewById<EditText>(R.id.etPostCreateContent)
 
-        val ivCreateNoticeBtn = findViewById<ImageView>(R.id.ivCreatePostBtn)
-        ivCreateNoticeBtn.setOnClickListener{
-            val createNoticeThread = Thread(createNoticeRunnable)
-            createNoticeThread.start()
+        val ivCreatePostBtn = findViewById<ImageView>(R.id.ivCreatePostBtn)
+        ivCreatePostBtn.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch {
+                val noticeRequest = NoticeRequest(
+                    etPostCreateContent.text.toString())
+                APIObject.getRetrofitAPIService.createNotice(noticeRequest)
+            }
             finish()
         }
     }
 
     override fun onDestroy() {
-        NoticeDB.destroyInstance()
         super.onDestroy()
+        NoticeDB.destroyInstance()
     }
 }
