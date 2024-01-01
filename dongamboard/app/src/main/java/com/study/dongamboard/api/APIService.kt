@@ -5,6 +5,7 @@ import com.study.dongamboard.model.request.CheckPasswordForMyPageRequest
 import com.study.dongamboard.model.request.NoticeRequest
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
+import com.study.dongamboard.model.request.UpdateNicknameRequest
 import com.study.dongamboard.model.request.UserRequest
 import com.study.dongamboard.model.response.MyInformationResponse
 import com.study.dongamboard.model.response.NoticeResponse
