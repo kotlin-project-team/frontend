@@ -1,6 +1,7 @@
 package com.study.dongamboard.api
 
 import com.skydoves.sandwich.ApiResponse
+import com.study.dongamboard.model.request.CheckPasswordForMyPageRequest
 import com.study.dongamboard.model.request.NoticeRequest
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
