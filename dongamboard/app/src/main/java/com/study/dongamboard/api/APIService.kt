@@ -5,6 +5,7 @@ import com.study.dongamboard.model.request.NoticeRequest
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
 import com.study.dongamboard.model.request.UserRequest
+import com.study.dongamboard.model.response.MyInformationResponse
 import com.study.dongamboard.model.response.NoticeResponse
 import com.study.dongamboard.type.BoardCategoryType
 import retrofit2.http.Body
@@ -53,4 +54,15 @@ interface APIService {
 
     @POST("/api/user")
     suspend fun createUser(@Body userRequest: UserRequest): ApiResponse<Unit>
+
+    @GET("/api/user")
+    suspend fun getMyInformation(): ApiResponse<MyInformationResponse>
+
+    @POST("/api/user/my-page/password")
+    suspend fun checkPasswordForMyPage(@Body checkPasswordForMyPageRequest: CheckPasswordForMyPageRequest): ApiResponse<Unit>
+
+    @PATCH("/api/user/password")
+    suspend fun updatePassword(@Body nicknameRequest: UpdateNicknameRequest): ApiResponse<Unit>
+
+    //TODO: delete user
 }
