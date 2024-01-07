@@ -7,6 +7,7 @@ import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
 import com.study.dongamboard.model.request.SignInRequest
 import com.study.dongamboard.model.request.UpdateNicknameRequest
+import com.study.dongamboard.model.request.UpdatePasswordRequest
 import com.study.dongamboard.model.request.UserRequest
 import com.study.dongamboard.model.response.MyInformationResponse
 import com.study.dongamboard.model.response.NoticeResponse
@@ -69,7 +70,11 @@ interface APIService {
     suspend fun checkPasswordForMyPage(@Body checkPasswordForMyPageRequest: CheckPasswordForMyPageRequest): ApiResponse<Unit>
 
     @PATCH("/api/user/password")
-    suspend fun updatePassword(@Body nicknameRequest: UpdateNicknameRequest): ApiResponse<Unit>
+    suspend fun updatePassword(@Body passwordRequest: UpdatePasswordRequest): ApiResponse<Unit>
 
-    //TODO: delete user
+    @PATCH("/api/user/nickname")
+    suspend fun updateNickname(@Body nicknameRequest: UpdateNicknameRequest): ApiResponse<Unit>
+
+    @DELETE("api/user")
+    suspend fun deleteUser(): ApiResponse<Unit>
 }
