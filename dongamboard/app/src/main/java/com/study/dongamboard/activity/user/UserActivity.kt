@@ -32,6 +32,17 @@ class UserActivity : AppCompatActivity() {
                     .show(supportFragmentManager, "")
             }
         }
+
+        val btnFinMyInfo = findViewById<Button>(R.id.btnFinMyInfo)
+        btnFinMyInfo. setOnClickListener{
+            SignInActivity.signInActivity.finish()
+            finish()
+        }
+
+        val btnDeleteAccount = findViewById<Button>(R.id.btnDeleteAccount)
+        btnDeleteAccount.setOnClickListener {
+            deleteUser()
+        }
     }
 
     private fun loadMyInfo() {
@@ -45,6 +56,18 @@ class UserActivity : AppCompatActivity() {
                 tvPostTitle.text = myInfo.studentId
                 tvPostContent.text = myInfo.nickname
                 Log.d("loadMyInfo", myInfo.nickname)
+            }.onError {
+                Log.d("statusCode", statusCode.toString())
+                Log.d("error", errorBody.toString())
+            }
+        }
+    }
+
+    private fun deleteUser() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = APIObject.getRetrofitAPIService.deleteUser()
+            response.onSuccess {
+                finish()
             }.onError {
                 Log.d("statusCode", statusCode.toString())
                 Log.d("error", errorBody.toString())
