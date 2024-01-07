@@ -16,11 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class JoinActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_join)
+        setContentView(R.layout.activity_signup)
 
         val etStuId = findViewById<EditText>(R.id.etStuId)
         val etPassword = findViewById<EditText>(R.id.etPassword)
