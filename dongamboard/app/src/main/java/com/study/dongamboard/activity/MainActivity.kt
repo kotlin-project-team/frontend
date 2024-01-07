@@ -10,8 +10,7 @@ import com.study.dongamboard.R
 import com.study.dongamboard.activity.notice.NoticeListActivity
 import com.study.dongamboard.activity.post.BestActivity
 import com.study.dongamboard.activity.post.PostListActivity
-import com.study.dongamboard.activity.user.LoginActivity
-import com.study.dongamboard.activity.user.UserActivity
+import com.study.dongamboard.activity.user.SignInActivity
 import com.study.dongamboard.type.BoardCategoryType
 
 class MainActivity : AppCompatActivity() {
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val ivUserPage = findViewById<ImageView>(R.id.ivUserPage)
         ivUserPage.setOnClickListener {
             //TODO: 로그인(token 확인) 처리에 따라 변경
-            val intent = Intent(this, UserActivity::class.java)
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
     }
