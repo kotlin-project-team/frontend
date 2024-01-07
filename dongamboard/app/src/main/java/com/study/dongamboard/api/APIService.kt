@@ -1,11 +1,17 @@
 package com.study.dongamboard.api
 
 import com.skydoves.sandwich.ApiResponse
+import com.study.dongamboard.model.request.CheckPasswordForMyPageRequest
 import com.study.dongamboard.model.request.NoticeRequest
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
+import com.study.dongamboard.model.request.SignInRequest
+import com.study.dongamboard.model.request.UpdateNicknameRequest
+import com.study.dongamboard.model.request.UpdatePasswordRequest
 import com.study.dongamboard.model.request.UserRequest
+import com.study.dongamboard.model.response.MyInformationResponse
 import com.study.dongamboard.model.response.NoticeResponse
+import com.study.dongamboard.model.response.SignInResponse
 import com.study.dongamboard.type.BoardCategoryType
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -53,4 +59,22 @@ interface APIService {
 
     @POST("/api/user")
     suspend fun createUser(@Body userRequest: UserRequest): ApiResponse<Unit>
+
+    @GET("/api/user")
+    suspend fun getMyInformation(): ApiResponse<MyInformationResponse>
+
+    @POST("/api/user/sign-in")
+    suspend fun signIn(@Body signInRequest: SignInRequest): ApiResponse<SignInResponse>
+
+    @POST("/api/user/my-page/password")
+    suspend fun checkPasswordForMyPage(@Body checkPasswordForMyPageRequest: CheckPasswordForMyPageRequest): ApiResponse<Unit>
+
+    @PATCH("/api/user/password")
+    suspend fun updatePassword(@Body passwordRequest: UpdatePasswordRequest): ApiResponse<Unit>
+
+    @PATCH("/api/user/nickname")
+    suspend fun updateNickname(@Body nicknameRequest: UpdateNicknameRequest): ApiResponse<Unit>
+
+    @DELETE("api/user")
+    suspend fun deleteUser(): ApiResponse<Unit>
 }
