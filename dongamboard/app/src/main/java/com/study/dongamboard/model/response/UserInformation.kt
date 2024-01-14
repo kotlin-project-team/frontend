@@ -5,13 +5,13 @@ import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
-data class NoticeResponse(
+data class UserInformation(
     @field:Json(name = "id")
-    val id: Int,
+    val id: Long,
 
-    @field:Json(name = "title")
-    val title: String,
+    @field:Json(name = "studentId")
+    val studentId: String,
 
-    @field:Json(name = "content")
-    val content: String? = null,
+    @field:Json(name = "nickname")
+    val nickname: String,
 ) : Serializable

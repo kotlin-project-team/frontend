@@ -33,7 +33,7 @@ class NoticeActivity : AppCompatActivity() {
         val tvNoticeTitle = findViewById<TextView>(R.id.tvNoticeTitle)
         val tvNoticeContent = findViewById<TextView>(R.id.tvNoticeContent)
 
-        tvNoticeTitle.text = "공지" + notice.id.toString()
+        tvNoticeTitle.text = notice.title
         tvNoticeContent.text = notice.content
     }
 

@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.study.dongamboard.model.NoticeData
 import com.study.dongamboard.model.response.NoticeResponse
 
-class NoticeAdapter(private val context: Context, val resId: Int, val datas: MutableList<NoticeResponse>) :
-    ArrayAdapter<NoticeData>(context, resId) {
+class NoticeAdapter(private val context: Context, private val resId: Int, private val data: MutableList<NoticeResponse>) :
+    ArrayAdapter<NoticeResponse>(context, resId) {
 
     override fun getCount(): Int {
-        return datas.size
+        return data.size
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -29,9 +28,7 @@ class NoticeAdapter(private val context: Context, val resId: Int, val datas: Mut
         val holder = convertView.getTag() as NoticeHolder
         val tvNoticelistTitle: TextView = holder.tvNoticelistTitle
 
-        // TODO: 추후 title 추가
-//        val title = datas[position].title
-        val title = "공지" + datas[position].id.toString()
+        val title = data[position].title
         tvNoticelistTitle.text = title
 
         return convertView

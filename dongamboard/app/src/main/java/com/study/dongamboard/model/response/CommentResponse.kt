@@ -5,13 +5,17 @@ import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
-data class NoticeResponse(
+data class CommentResponse(
     @field:Json(name = "id")
-    val id: Int,
+    val id: Long,
 
-    @field:Json(name = "title")
-    val title: String,
+    @field:Json(name = "userId")
+    val userId: Long,
+
+    @field:Json(name = "postId")
+    val postId: Long,
 
     @field:Json(name = "content")
-    val content: String? = null,
+    val content: String,
 ) : Serializable
+
