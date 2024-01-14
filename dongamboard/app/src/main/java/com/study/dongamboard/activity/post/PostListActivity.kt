@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lakue.pagingbutton.LakuePagingButton
 import com.lakue.pagingbutton.OnPageSelectListener
 import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.adapter.PostAdapter
@@ -38,14 +39,13 @@ class PostListActivity : AppCompatActivity() {
 
         category = intent.getSerializableExtra("postCategory") as BoardCategoryType
         val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
-        tvPostListCategory.setText(category.toString())
-
-        postDB = PostDB.getInstance(this)!!
+        tvPostListCategory.text = category.toString()
 
         lvPost = findViewById<ListView>(R.id.lvPost)
         postList = arrayListOf<PostResponse>()
 
-        setPager()
+//        setPager()
+        paging()
         readAllPostsByPage()
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
@@ -99,6 +99,8 @@ class PostListActivity : AppCompatActivity() {
             }.onError {
                 Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
                 // TODO: status code에 따른 처리
+            }.onFailure {
+                Log.e("failed",  this)
             }
         }
     }

@@ -25,6 +25,7 @@ import com.study.dongamboard.db.CommentDB
 import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.CommentData
 import com.study.dongamboard.model.response.PostResponse
+import com.study.dongamboard.type.BoardCategoryType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,6 +53,7 @@ class PostActivity : AppCompatActivity() {
         }
 
         post = intent.getSerializableExtra("postData") as PostResponse
+        category = intent.getSerializableExtra("category") as BoardCategoryType
         reloadPost()
 
         postDB = PostDB.getInstance(this)!!
@@ -113,6 +115,12 @@ class PostActivity : AppCompatActivity() {
         val tvLikes = findViewById<TextView>(R.id.tvPostLikes)
         val tvCmtCnt = findViewById<TextView>(R.id.tvCmtCnt)
         val tvPostCategory = findViewById<TextView>(R.id.tvPostCategory)
+
+        tvPostTitle.text = post.title
+        tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
+        tvCmtCnt.text = "[댓글 " + "0" + "]"
+        tvPostContent.text = post.content
+        tvPostCategory.text = category.toString()
 
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getPostById(post.id)
