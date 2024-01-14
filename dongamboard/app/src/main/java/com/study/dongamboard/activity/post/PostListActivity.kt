@@ -23,15 +23,14 @@ import kotlinx.coroutines.launch
 
 class PostListActivity : AppCompatActivity() {
 
-    lateinit var category: BoardCategoryType
-    lateinit var postAdapter: PostAdapter
-    lateinit var lvPost: ListView
-    lateinit var postDB: PostDB
-    lateinit var postList: ArrayList<PostResponse>
+    private lateinit var category: BoardCategoryType
+    private lateinit var postAdapter: PostAdapter
+    private lateinit var lvPost: ListView
+    private lateinit var postList: ArrayList<PostResponse>
 
-    val displayPageItemSize = 5
-    var maxPageSize = 1
-    var nowPage = 1
+    private val displayPageItemSize = 6
+    private var maxPageSize = 250
+    private var nowPage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,8 @@ class PostListActivity : AppCompatActivity() {
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
             val intent = Intent(this, PostActivity::class.java)
-            intent.putExtra("postData", postList.get(i))
+            intent.putExtra("postData", postList[i])
+            intent.putExtra("category", category)
             startActivity(intent)
         }
 
@@ -63,7 +63,7 @@ class PostListActivity : AppCompatActivity() {
             nowPage = 1
         }
 
-        var swipe = findViewById<SwipeRefreshLayout>(R.id.swipePostlistLayout)
+        val swipe = findViewById<SwipeRefreshLayout>(R.id.swipePostlistLayout)
         swipe.setOnRefreshListener {
             readAllPostsByPage()
             swipe.isRefreshing = false

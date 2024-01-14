@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class UserActivity : AppCompatActivity() {
 
-    lateinit var myInfo: MyInformationResponse
+    private lateinit var myInfo: MyInformationResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

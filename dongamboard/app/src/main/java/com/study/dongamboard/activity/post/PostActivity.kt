@@ -31,12 +31,15 @@ import kotlinx.coroutines.launch
 
 class PostActivity : AppCompatActivity() {
 
-    lateinit var postDB: PostDB
-    lateinit var post: PostResponse
-    lateinit var commentAdapter: CommentAdapter
-    lateinit var lvCmt: ListView
-    lateinit var commentDB: CommentDB
-    lateinit var commentList: ArrayList<CommentData>
+    private lateinit var post: PostResponse
+    private lateinit var category: BoardCategoryType
+    private lateinit var commentAdapter: CommentAdapter
+    private lateinit var lvCmt: ListView
+    private lateinit var commentList: ArrayList<CommentResponse>
+
+    private val displayPageItemSize = 6
+    private var maxPageSize = 250
+    private var nowPage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

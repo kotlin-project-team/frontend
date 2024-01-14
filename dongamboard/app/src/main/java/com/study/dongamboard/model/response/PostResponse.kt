@@ -2,42 +2,25 @@ package com.study.dongamboard.model.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.study.dongamboard.model.CommentData
-import com.study.dongamboard.type.BoardCategoryType
 import java.io.Serializable
 
-@Entity(tableName = "post_table")
 @JsonClass(generateAdapter = true)
 data class PostResponse(
     @field:Json(name = "id")
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Long,
 
-    @field:Json(name = "userId")
-    @ColumnInfo(name = "user_id")
-    val userId: Int,
+    @field:Json(name = "user")
+    val user: UserInformation,
 
     @field:Json(name = "title")
-    @ColumnInfo
     val title: String,
 
     @field:Json(name = "content")
-    @ColumnInfo
-    val content: String? = null,
-
-    @field:Json(name = "category")
-    @ColumnInfo
-    val category: BoardCategoryType? = null,
+    val content: String,
 
     @field:Json(name = "likes")
-    @ColumnInfo
-    val likes: Int? = null,
+    val likes: Int,
 
     @field:Json(name = "views")
-    @ColumnInfo
-    val views: Int? = null,
-
-    @field:Json(name = "comments")
-    @ColumnInfo
-    val comments: List<CommentData>? = null
+    val views: Int,
 ) : Serializable

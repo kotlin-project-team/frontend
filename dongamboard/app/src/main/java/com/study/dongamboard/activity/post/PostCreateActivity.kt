@@ -14,15 +14,13 @@ import kotlinx.coroutines.launch
 
 class PostCreateActivity : AppCompatActivity() {
 
-    lateinit var category: BoardCategoryType
-    lateinit var postDB : PostDB
+    private lateinit var category: BoardCategoryType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
         category = intent.getSerializableExtra("postCategory") as BoardCategoryType
-        postDB = PostDB.getInstance(this)!!
 
         val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
         val etPostCreateContent = findViewById<EditText>(R.id.etPostCreateContent)
@@ -33,7 +31,8 @@ class PostCreateActivity : AppCompatActivity() {
                 val postRequest = PostRequest(
                     etPostCreateTitle.text.toString(),
                     etPostCreateContent.text.toString(),
-                    category)
+                    category
+                )
                 APIObject.getRetrofitAPIService.createPost(postRequest)
             }
             finish()

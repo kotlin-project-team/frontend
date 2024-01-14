@@ -8,11 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.study.dongamboard.model.response.PostResponse
 
-class PostAdapter(private val context: Context, val resId: Int, val datas: MutableList<PostResponse>) :
+class PostAdapter(private val context: Context, private val resId: Int, private val data: MutableList<PostResponse>) :
 ArrayAdapter<PostResponse>(context, resId) {
 
     override fun getCount(): Int {
-        return datas.size
+        return data.size
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -27,12 +27,11 @@ ArrayAdapter<PostResponse>(context, resId) {
         }
         val holder = convertView.getTag() as PostHolder
         val tvPostTitle: TextView = holder.tvPostTitle
-        val tvCmtcnt: TextView = holder.tvCmtCnt
+        val tvLikes: TextView = holder.tvLikes
 
-
-        val (title, cmtCnt) = arrayOf(datas[position].title, 0)
+        val (title, likes) = arrayOf(data[position].title, data[position].likes)
         tvPostTitle.text = title.toString()
-        tvCmtcnt.text = "[댓글 " + cmtCnt.toString() + "]"
+        tvLikes.text = "[댓글 " + likes.toString() + "]"
 
         return convertView
     }

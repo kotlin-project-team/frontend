@@ -12,7 +12,7 @@ class CommentAdapter(private val context: Context, val resId: Int, val datas: Mu
     ArrayAdapter<CommentData>(context, resId) {
 
     override fun getCount(): Int {
-        return datas.size
+        return data.size
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -30,7 +30,8 @@ class CommentAdapter(private val context: Context, val resId: Int, val datas: Mu
         val tvCmtContent: TextView = holder.tvCmtContent
 
 
-        val (nickname, content) = arrayOf(datas[position].nickname, datas[position].content)
+        //TODO: 추후 userId -> nickname 변경
+        val (nickname, content) = arrayOf(data[position].userId, data[position].content)
         tvCmtNickname.text = nickname.toString()
         tvCmtContent.text = content.toString()
 

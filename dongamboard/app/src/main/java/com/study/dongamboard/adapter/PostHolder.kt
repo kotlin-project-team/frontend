@@ -6,10 +6,10 @@ import com.study.dongamboard.R
 
 class PostHolder(root: View) {
     var tvPostTitle: TextView
-    var tvCmtCnt: TextView
+    var tvLikes: TextView
 
     init {
         tvPostTitle = root.findViewById(R.id.tvPostlistTitle)
-        tvCmtCnt = root.findViewById(R.id.tvPostlistLikes)
+        tvLikes = root.findViewById(R.id.tvPostlistLikes)
     }
 }

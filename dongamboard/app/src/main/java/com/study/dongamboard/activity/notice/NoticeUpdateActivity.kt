@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class NoticeUpdateActivity : AppCompatActivity() {
 
-    lateinit var notice: NoticeResponse
+    private lateinit var notice: NoticeResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
