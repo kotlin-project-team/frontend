@@ -6,15 +6,12 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
-import com.study.dongamboard.db.NoticeDB
 import com.study.dongamboard.model.request.NoticeRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NoticeCreateActivity : AppCompatActivity() {
-
-    lateinit var noticeDB : NoticeDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +32,5 @@ class NoticeCreateActivity : AppCompatActivity() {
             }
             finish()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        NoticeDB.destroyInstance()
     }
 }

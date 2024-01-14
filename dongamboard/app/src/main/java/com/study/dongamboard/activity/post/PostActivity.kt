@@ -171,12 +171,7 @@ class PostActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        readAllComments()
         super.onResume()
-    }
-
-    override fun onDestroy() {
-        CommentDB.destroyInstance()
-        super.onDestroy()
+        readAllComments()
     }
 }

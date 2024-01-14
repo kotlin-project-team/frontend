@@ -1,8 +1,5 @@
 package com.study.dongamboard.model.response
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.study.dongamboard.model.CommentData

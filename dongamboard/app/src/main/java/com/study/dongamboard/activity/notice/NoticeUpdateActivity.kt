@@ -6,7 +6,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
-import com.study.dongamboard.db.NoticeDB
 import com.study.dongamboard.model.request.NoticeRequest
 import com.study.dongamboard.model.response.NoticeResponse
 import kotlinx.coroutines.CoroutineScope
@@ -40,10 +39,5 @@ class NoticeUpdateActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-
-    override fun onDestroy() {
-        NoticeDB.destroyInstance()
-        super.onDestroy()
     }
 }

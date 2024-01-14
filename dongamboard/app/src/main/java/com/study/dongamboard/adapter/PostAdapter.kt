@@ -37,18 +37,3 @@ ArrayAdapter<PostResponse>(context, resId) {
         return convertView
     }
 }
-
-
-//class PostAdapter(private val context: Context, val postList: ArrayList<PostData>) : BaseAdapter() {
-//
-//    override fun getCount(): Int {
-//        return postList.size
-//    }
-//
-//    override fun getItem(position: Int): Any {
-//        return postList[position]
-//    }
-//
-//    override fun getItemId(position: Int): Long {
-//        return postList[position].id.toLong()
-//    }

@@ -15,7 +15,6 @@ import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.api.APIObject
-import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.type.BoardCategoryType
 import kotlinx.coroutines.CoroutineScope
@@ -136,12 +135,7 @@ class PostListActivity : AppCompatActivity() {
 
     override fun onResume() {
         readAllPostsByPage()
-        setPager()
+//        setPager()
         super.onResume()
-    }
-
-    override fun onDestroy() {
-        PostDB.destroyInstance()
-        super.onDestroy()
     }
 }

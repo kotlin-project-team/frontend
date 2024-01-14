@@ -14,7 +14,6 @@ import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.adapter.NoticeAdapter
 import com.study.dongamboard.api.APIObject
-import com.study.dongamboard.db.NoticeDB
 import com.study.dongamboard.model.response.NoticeResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +23,6 @@ class NoticeListActivity : AppCompatActivity() {
 
     private lateinit var noticeAdapter: NoticeAdapter
     private lateinit var lvNotice: ListView
-    private lateinit var noticeDB: NoticeDB
     private lateinit var noticeList : ArrayList<NoticeResponse>
 
     private val displayPageItemSize = 6
@@ -34,8 +32,6 @@ class NoticeListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_noticelist)
-
-        noticeDB = NoticeDB.getInstance(this)!!
 
         lvNotice = findViewById<ListView>(R.id.lvNotice)
         noticeList = arrayListOf<NoticeResponse>()
@@ -130,10 +126,5 @@ class NoticeListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         readAllNoticesByPage()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        NoticeDB.destroyInstance()
     }
 }

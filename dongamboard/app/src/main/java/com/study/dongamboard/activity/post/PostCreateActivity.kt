@@ -6,7 +6,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
-import com.study.dongamboard.db.PostDB
 import com.study.dongamboard.model.request.PostRequest
 import com.study.dongamboard.type.BoardCategoryType
 import kotlinx.coroutines.CoroutineScope
@@ -39,10 +38,5 @@ class PostCreateActivity : AppCompatActivity() {
             }
             finish()
         }
-    }
-
-    override fun onDestroy() {
-        PostDB.destroyInstance()
-        super.onDestroy()
     }
 }
