@@ -1,6 +1,7 @@
 package com.study.dongamboard.activity.notice
 
 import android.os.Bundle
+import android.text.InputType
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,16 +18,16 @@ class NoticeCreateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
-        noticeDB = NoticeDB.getInstance(this)!!
-
-        // TODO: 추후 title 추가
-//        val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
+        val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
         val etPostCreateContent = findViewById<EditText>(R.id.etPostCreateContent)
+
+        etPostCreateTitle.inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
 
         val ivCreatePostBtn = findViewById<ImageView>(R.id.ivCreatePostBtn)
         ivCreatePostBtn.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
                 val noticeRequest = NoticeRequest(
+                    etPostCreateTitle.text.toString(),
                     etPostCreateContent.text.toString())
                 APIObject.getRetrofitAPIService.createNotice(noticeRequest)
             }

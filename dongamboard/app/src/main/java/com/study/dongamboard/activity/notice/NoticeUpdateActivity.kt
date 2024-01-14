@@ -22,17 +22,17 @@ class NoticeUpdateActivity : AppCompatActivity() {
 
         notice = intent.getSerializableExtra("noticeData") as NoticeResponse
 
-        // TODO: title 추가 시 설정
-//        val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
+        val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
         val etPostCreateContent = findViewById<EditText>(R.id.etPostCreateContent)
 
-//        etPostCreateTitle.setText(notice.title)
+        etPostCreateTitle.setText(notice.title)
         etPostCreateContent.setText(notice.content)
 
         val ivCreatePostBtn = findViewById<ImageView>(R.id.ivCreatePostBtn)
         ivCreatePostBtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val noticeRequest = NoticeRequest(
+                    etPostCreateTitle.text.toString(),
                     etPostCreateContent.text.toString()
                 )
                 APIObject.getRetrofitAPIService.updateNotice(notice.id, noticeRequest)
