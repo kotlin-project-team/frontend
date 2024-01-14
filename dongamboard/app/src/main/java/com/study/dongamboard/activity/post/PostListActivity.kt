@@ -75,6 +75,8 @@ class PostListActivity : AppCompatActivity() {
             val response = APIObject.getRetrofitAPIService.getAllPost(0, 0, category)
             response.onSuccess {
                 maxPageSize = data.size / displayPageItemSize
+                Log.d("size", data.size.toString() + " " + displayPageItemSize)
+                Log.d("maxPageSize", maxPageSize.toString())
                 if (data.size % displayPageItemSize > 0) {
                     maxPageSize++
                 }

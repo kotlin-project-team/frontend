@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.study.dongamboard.model.CommentData
+import com.study.dongamboard.model.response.CommentResponse
 
-class CommentAdapter(private val context: Context, val resId: Int, val datas: MutableList<CommentData>) :
-    ArrayAdapter<CommentData>(context, resId) {
+class CommentAdapter(private val context: Context, private val resId: Int, private val data: MutableList<CommentResponse>) :
+    ArrayAdapter<CommentResponse>(context, resId) {
 
     override fun getCount(): Int {
         return data.size
@@ -37,5 +37,4 @@ class CommentAdapter(private val context: Context, val resId: Int, val datas: Mu
 
         return convertView
     }
-
 }

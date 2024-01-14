@@ -17,13 +17,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.adapter.CommentAdapter
 import com.study.dongamboard.api.APIObject
-import com.study.dongamboard.db.CommentDB
-import com.study.dongamboard.db.PostDB
-import com.study.dongamboard.model.CommentData
+import com.study.dongamboard.model.request.CommentRequest
+import com.study.dongamboard.model.response.CommentResponse
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.type.BoardCategoryType
 import kotlinx.coroutines.CoroutineScope
@@ -56,43 +56,27 @@ class PostActivity : AppCompatActivity() {
         category = intent.getSerializableExtra("category") as BoardCategoryType
         reloadPost()
 
-        postDB = PostDB.getInstance(this)!!
-        commentDB = CommentDB.getInstance(this)!!
-
         lvCmt = findViewById<ListView>(R.id.lvCmt)
-        commentList = arrayListOf<CommentData>()
-
-        val createCommentRunnable = Runnable {
-            val newComment =
-                CommentData(
-                    0,
-                    post.id,
-                    findViewById<EditText>(R.id.etCmtCnt).text.toString(),
-                    "익명"
-                )
-            commentDB.commentDao().insertComment(newComment)
-        }
+        commentList = arrayListOf<CommentResponse>()
 
         val ivCreateCmt = findViewById<ImageView>(R.id.ivCreateCmtBtn)
         ivCreateCmt.setOnClickListener{
-            if (findViewById<EditText>(R.id.etCmtCnt).text.isEmpty()) {
+            val content = findViewById<EditText>(R.id.etCmtCnt).text
+            if (content.isEmpty()) {
                 Toast.makeText(this, "내용을 입력하세요", Toast.LENGTH_SHORT).show()
             } else {
-                val createCommentThread = Thread(createCommentRunnable)
-                createCommentThread.start()
-                findViewById<EditText>(R.id.etCmtCnt).setText("")
-                hideKeyboard(this)
-                readAllComments()
+                val commentReq = CommentRequest(content.toString())
+                createComment(commentReq)
             }
         }
 
         lvCmt.setOnItemClickListener { adapterView, view, i, l ->
-            val comment = commentList.get(i)
+            val comment = commentList[i]
             val builder = AlertDialog.Builder(this)
             builder.setTitle("댓글 삭제")
                 .setMessage("댓글을 삭제하시겠습니까?")
                 .setPositiveButton("삭제", DialogInterface.OnClickListener { dialogInterface, i ->
-                    commentDB.commentDao().deleteComment(comment)
+                    //TODO: Comment delete 동작
                     commentList.remove(comment)
                     commentAdapter.notifyDataSetChanged()
                 })
@@ -130,7 +114,7 @@ class PostActivity : AppCompatActivity() {
                 tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
                 tvCmtCnt.text = "[댓글 " + "0" + "]"
                 tvPostContent.text = post.content
-                tvPostCategory.text = post.category.toString()
+                tvPostCategory.text = category.toString()
             }.onError {
                 Log.d("statusCode", statusCode.toString())
                 Log.d("error", errorBody.toString())
@@ -139,14 +123,38 @@ class PostActivity : AppCompatActivity() {
     }
 
     private fun readAllComments() {
-        commentList.clear()
-        runOnUiThread {
-            commentList = commentDB.commentDao().findCommentsByPostId(post.id) as ArrayList<CommentData>
-            commentAdapter = CommentAdapter(this, R.layout.comment_adapter_view,
-                commentList as MutableList<CommentData>
-            )
-            commentAdapter.notifyDataSetChanged()
-            lvCmt.adapter = commentAdapter
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = APIObject.getRetrofitAPIService.getAllComment(post.id, displayPageItemSize, nowPage - 1, 0)
+            response.onSuccess {
+                Log.d("commentList", data.toString())
+                commentList = data as ArrayList<CommentResponse>
+                commentAdapter = CommentAdapter(applicationContext, R.layout.comment_adapter_view,
+                    commentList as MutableList<CommentResponse>
+                )
+                commentAdapter.notifyDataSetChanged()
+                lvCmt.adapter = commentAdapter
+            }.onError {
+                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
+                // TODO: status code에 따른 처리
+            }.onFailure {
+                Log.e("failed",  this)
+            }
+        }
+    }
+
+    private fun createComment(commentReq: CommentRequest) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = APIObject.getRetrofitAPIService.createComment(post.id, commentReq)
+            response.onSuccess {
+                findViewById<EditText>(R.id.etCmtCnt).setText("")
+                hideKeyboard(applicationContext as PostActivity)
+                readAllComments()
+            }.onError {
+                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
+                // TODO: status code에 따른 처리
+            }.onFailure {
+                Log.e("failed",  this)
+            }
         }
     }
 
