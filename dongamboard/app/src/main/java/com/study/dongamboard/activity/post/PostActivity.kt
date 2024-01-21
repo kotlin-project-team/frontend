@@ -171,18 +171,22 @@ class PostActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.miUpdatePost -> {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val intent = Intent(applicationContext, PostUpdateActivity::class.java)
-                    intent.putExtra("postData", post)
-                    startActivity(intent)
-                    reloadPost()
-                }
+                val intent = Intent(applicationContext, PostUpdateActivity::class.java)
+                intent.putExtra("postData", post)
+                intent.putExtra("category", category)
+                startActivity(intent)
             }
             R.id.miDeletePost ->{
                 CoroutineScope(Dispatchers.IO).launch {
-                    APIObject.getRetrofitAPIService.deletePost(post.id)
-                    // TODO: 댓글 삭제 요청 추가
-                    finish()
+                    val response = APIObject.getRetrofitAPIService.deletePost(post.id)
+                    response.onSuccess {
+                        // TODO: 해당 포스트의 댓글 삭제 요청 추가
+                    }.onError {
+                        Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
+                        // TODO: status code에 따른 처리
+                    }.onFailure {
+                        Log.e("failed",  this)
+                    }
                 }
             }
         }
