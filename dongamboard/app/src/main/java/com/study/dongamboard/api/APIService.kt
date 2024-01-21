@@ -28,7 +28,7 @@ interface APIService {
     suspend fun getAllPost(
         @Query(value = "size") size: Int,
         @Query(value = "page") page: Int,
-        @Query(value = "category") category: BoardCategoryType): ApiResponse<List<PostResponse>>
+        @Query(value = "category") category: BoardCategoryType): ApiResponse<AllPostByCategoryResponse>
 
     @GET("/api/post/{postId}")
     suspend fun getPostById(@Path(value = "postId") id: Long): ApiResponse<PostResponse>

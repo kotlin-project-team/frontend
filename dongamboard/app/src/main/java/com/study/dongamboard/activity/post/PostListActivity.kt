@@ -30,7 +30,7 @@ class PostListActivity : AppCompatActivity() {
     private lateinit var postList: ArrayList<PostResponse>
 
     private val displayPageItemSize = 6
-    private var maxPageSize = 250
+    private var maxPageSize = 1
     private var nowPage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +44,7 @@ class PostListActivity : AppCompatActivity() {
         lvPost = findViewById<ListView>(R.id.lvPost)
         postList = arrayListOf<PostResponse>()
 
-//        setPager()
-        paging()
+        setPager()
         readAllPostsByPage()
 
         lvPost.setOnItemClickListener { adapterView, view, i, l ->
@@ -65,6 +64,7 @@ class PostListActivity : AppCompatActivity() {
 
         val swipe = findViewById<SwipeRefreshLayout>(R.id.swipePostlistLayout)
         swipe.setOnRefreshListener {
+            setPager()
             readAllPostsByPage()
             swipe.isRefreshing = false
         }
@@ -74,10 +74,10 @@ class PostListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllPost(0, 0, category)
             response.onSuccess {
-                maxPageSize = data.size / displayPageItemSize
-                Log.d("size", data.size.toString() + " " + displayPageItemSize)
+                maxPageSize = data.postCount / displayPageItemSize
+                Log.d("size", data.postCount.toString() + " " + displayPageItemSize)
                 Log.d("maxPageSize", maxPageSize.toString())
-                if (data.size % displayPageItemSize > 0) {
+                if (data.postCount % displayPageItemSize > 0) {
                     maxPageSize++
                 }
                 paging()
@@ -92,7 +92,7 @@ class PostListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllPost(displayPageItemSize, nowPage - 1, category)
             response.onSuccess {
-                postList = data as ArrayList<PostResponse>
+                postList = data.posts as ArrayList<PostResponse>
                 postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
                     postList as MutableList<PostResponse>
                 )
@@ -138,8 +138,8 @@ class PostListActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        readAllPostsByPage()
-//        setPager()
         super.onResume()
+        setPager()
+        readAllPostsByPage()
     }
 }
