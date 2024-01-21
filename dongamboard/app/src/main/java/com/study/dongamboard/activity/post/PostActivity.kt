@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
+import android.widget.AbsListView
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
@@ -38,9 +39,8 @@ class PostActivity : AppCompatActivity() {
     private lateinit var lvCmt: ListView
     private lateinit var commentList: ArrayList<CommentResponse>
 
-    private val displayPageItemSize = 6
-    private var maxPageSize = 250
-    private var nowPage = 1
+    private val displayCommentSize = 5
+    private var lastCommentId = -1L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +69,21 @@ class PostActivity : AppCompatActivity() {
                 createComment(commentReq)
             }
         }
+
+        lvCmt.setOnScrollListener(object : AbsListView.OnScrollListener {
+            override fun onScrollStateChanged(p0: AbsListView?, p1: Int) {
+                if (!lvCmt.canScrollVertically(1)) {
+                    val lastY = lvCmt.scrollY
+                    lastCommentId = commentList[commentList.size - 1].id
+                    readCommentsByScroll()
+                    lvCmt.scrollY = lastY
+                }
+                Log.d("scrollY", lvCmt.scrollY.toString())
+            }
+
+            override fun onScroll(p0: AbsListView?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
 
         lvCmt.setOnItemClickListener { adapterView, view, i, l ->
             val comment = commentList[i]
@@ -122,12 +137,12 @@ class PostActivity : AppCompatActivity() {
         }
     }
 
-    private fun readAllComments() {
+    private fun readCommentsByScroll() {
         CoroutineScope(Dispatchers.Main).launch {
-            val response = APIObject.getRetrofitAPIService.getAllComment(post.id, displayPageItemSize, nowPage - 1, 0)
+            val response = APIObject.getRetrofitAPIService.getAllComment(post.id, displayCommentSize, 0, lastCommentId)
             response.onSuccess {
-                Log.d("commentList", data.toString())
-                commentList = data as ArrayList<CommentResponse>
+                commentList.addAll(data as ArrayList<CommentResponse>)
+                Log.d("commentList", commentList.toString())
                 commentAdapter = CommentAdapter(applicationContext, R.layout.comment_adapter_view,
                     commentList as MutableList<CommentResponse>
                 )
@@ -148,7 +163,7 @@ class PostActivity : AppCompatActivity() {
             response.onSuccess {
                 findViewById<EditText>(R.id.etCmtCnt).setText("")
                 hideKeyboard(applicationContext as PostActivity)
-                readAllComments()
+                readCommentsByScroll()
             }.onError {
                 Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
                 // TODO: status code에 따른 처리
@@ -195,6 +210,7 @@ class PostActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        readAllComments()
+        reloadPost()
+        readCommentsByScroll()
     }
 }

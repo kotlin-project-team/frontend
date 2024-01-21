@@ -152,7 +152,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/svCmt"
         android:layout_width="394dp"
         android:layout_height="409dp"
         android:background="#FFFFFF"
