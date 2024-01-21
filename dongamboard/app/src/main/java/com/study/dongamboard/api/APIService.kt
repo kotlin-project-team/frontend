@@ -10,6 +10,7 @@ import com.study.dongamboard.model.request.SignInRequest
 import com.study.dongamboard.model.request.UpdateNicknameRequest
 import com.study.dongamboard.model.request.UpdatePasswordRequest
 import com.study.dongamboard.model.request.UserRequest
+import com.study.dongamboard.model.response.AllPostByCategoryResponse
 import com.study.dongamboard.model.response.CommentResponse
 import com.study.dongamboard.model.response.MyInformationResponse
 import com.study.dongamboard.model.response.NoticeResponse
@@ -28,22 +29,22 @@ interface APIService {
     suspend fun getAllPost(
         @Query(value = "size") size: Int,
         @Query(value = "page") page: Int,
-        @Query(value = "category") category: BoardCategoryType): ApiResponse<List<PostResponse>>
+        @Query(value = "category") category: BoardCategoryType): ApiResponse<AllPostByCategoryResponse>
 
     @GET("/api/post/{postId}")
     suspend fun getPostById(@Path(value = "postId") id: Long): ApiResponse<PostResponse>
 
     @POST("/api/post")
-    suspend fun createPost(@Body postRequest: PostRequest)
+    suspend fun createPost(@Body postRequest: PostRequest): ApiResponse<Unit>
 
     @PATCH("/api/post/{postId}")
-    suspend fun updatePost(@Path(value = "postId") id: Long, @Body postRequest: PostRequest)
+    suspend fun updatePost(@Path(value = "postId") id: Long, @Body postRequest: PostRequest): ApiResponse<Unit>
 
     @DELETE("/api/post/{postId}")
-    suspend fun deletePost(@Path(value = "postId") id: Long)
+    suspend fun deletePost(@Path(value = "postId") id: Long): ApiResponse<Unit>
 
     @POST("/api/post/like/{postId}")
-    suspend fun clickPostLike(@Path(value = "postId") id: Long)
+    suspend fun clickPostLike(@Path(value = "postId") id: Long): ApiResponse<Unit>
 
     @GET("/api/post/{postId}/comment")
     suspend fun getAllComment(
