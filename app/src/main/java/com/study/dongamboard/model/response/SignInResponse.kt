@@ -16,5 +16,8 @@ data class SignInResponse(
     val nickname: String,
 
     @field:Json(name = "accessToken")
-    val accessToken: String
+    val accessToken: String,
+
+    @field:Json(name = "refreshToken")
+    val refreshToken: String
 ) : Serializable
