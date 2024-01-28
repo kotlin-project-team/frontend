@@ -72,11 +72,11 @@ interface APIService {
     @DELETE("/api/notice/{noticeId}")
     suspend fun deleteNotice(@Path(value = "noticeId") id: Int): ApiResponse<Unit>
 
-    @POST("/api/user")
-    suspend fun createUser(@Body userRequest: UserRequest): ApiResponse<Unit>
-
     @GET("/api/user")
     suspend fun getMyInformation(): ApiResponse<MyInformationResponse>
+
+    @POST("/api/user/sign-up")
+    suspend fun createUser(@Body userRequest: UserRequest): ApiResponse<Unit>
 
     @POST("/api/user/sign-in")
     suspend fun signIn(@Body signInRequest: SignInRequest): ApiResponse<SignInResponse>

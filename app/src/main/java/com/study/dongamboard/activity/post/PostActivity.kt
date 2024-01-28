@@ -179,7 +179,14 @@ class PostActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_post, menu)
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = APIObject.getRetrofitAPIService.getMyInformation()
+            response.onSuccess {
+                if (data.studentId == post.user.studentId) {
+                    menuInflater.inflate(R.menu.menu_post, menu)
+                }
+            }
+        }
         return true
     }
 
@@ -195,6 +202,7 @@ class PostActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val response = APIObject.getRetrofitAPIService.deletePost(post.id)
                     response.onSuccess {
+                        finish()
                         // TODO: 해당 포스트의 댓글 삭제 요청 추가
                     }.onError {
                         Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
+import com.study.dongamboard.activity.user.SignInActivity.Companion.signInActivity
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.model.response.MyInformationResponse
 import kotlinx.coroutines.CoroutineScope
@@ -35,7 +36,9 @@ class UserActivity : AppCompatActivity() {
 
         val btnFinMyInfo = findViewById<Button>(R.id.btnFinMyInfo)
         btnFinMyInfo. setOnClickListener{
-            SignInActivity.signInActivity.finish()
+            if (SignInActivity.isInitialized()) {
+                signInActivity.finish()
+            }
             finish()
         }
 
