@@ -25,6 +25,7 @@ class SignInActivity : AppCompatActivity() {
 
     companion object{
         lateinit var signInActivity: SignInActivity
+        fun isInitialized() = ::signInActivity.isInitialized
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
