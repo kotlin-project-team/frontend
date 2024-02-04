@@ -2,7 +2,7 @@ package com.study.dongamboard.model.request
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
@@ -14,5 +14,5 @@ data class PostRequest (
     val content: String,
 
     @field:Json(name = "category")
-    val category: BoardCategoryType,
+    val category: BoardCategory,
 ) : Serializable

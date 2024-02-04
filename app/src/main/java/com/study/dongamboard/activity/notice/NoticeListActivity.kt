@@ -2,24 +2,30 @@ package com.study.dongamboard.activity.notice
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lakue.pagingbutton.LakuePagingButton
 import com.lakue.pagingbutton.OnPageSelectListener
 import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.adapter.NoticeAdapter
 import com.study.dongamboard.api.APIObject
+import com.study.dongamboard.api.Utils
 import com.study.dongamboard.model.response.NoticeResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NoticeListActivity : AppCompatActivity() {
+
+    private val utils: Utils by lazy {
+        Utils(this)
+    }
 
     private lateinit var noticeAdapter: NoticeAdapter
     private lateinit var lvNotice: ListView
@@ -63,15 +69,19 @@ class NoticeListActivity : AppCompatActivity() {
             val response = APIObject.getRetrofitAPIService.getAllNotice(0, 0)
             response.onSuccess {
                 maxPageSize = data.size / displayPageItemSize
-                Log.d("size", data.size.toString() + " " + displayPageItemSize)
-                Log.d("maxPageSize", maxPageSize.toString())
                 if (data.isNotEmpty() && data.size % displayPageItemSize > 0) {
                     maxPageSize++
                     paging()
                 }
+
+                utils.logD(statusCode)
+                utils.logD("size" + data.size.toString() + " " + displayPageItemSize)
+                utils.logD("maxPageSize: $maxPageSize")
             }.onError {
-                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
-                // TODO: status code에 따른 처리
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }
@@ -86,9 +96,13 @@ class NoticeListActivity : AppCompatActivity() {
                 )
                 noticeAdapter.notifyDataSetChanged()
                 lvNotice.adapter = noticeAdapter
+
+                utils.logD(statusCode)
             }.onError {
-                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
-                // TODO: status code 처리
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }

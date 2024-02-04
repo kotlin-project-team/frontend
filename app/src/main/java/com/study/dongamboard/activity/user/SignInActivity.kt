@@ -16,7 +16,7 @@ import com.study.dongamboard.activity.MainActivity.Companion.tokenDataStore
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.api.TokenAuthenticator
 import com.study.dongamboard.model.request.SignInRequest
-import com.study.dongamboard.type.ResponseStatusType
+import com.study.dongamboard.type.ResponseStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,7 +53,7 @@ class SignInActivity : AppCompatActivity() {
                 }.onError {
                     Log.d("statusCode", statusCode.toString())
                     Log.d("error", errorBody.toString())
-                    if (statusCode.code == ResponseStatusType.BAD_REQUEST.code) {
+                    if (statusCode.code == ResponseStatus.BAD_REQUEST.code) {
                         Toast.makeText(applicationContext, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                         etSignInPwd.setText("")
                     }

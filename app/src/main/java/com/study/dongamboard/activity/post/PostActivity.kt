@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
@@ -23,18 +22,23 @@ import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.adapter.CommentAdapter
 import com.study.dongamboard.api.APIObject
+import com.study.dongamboard.api.Utils
 import com.study.dongamboard.model.request.CommentRequest
 import com.study.dongamboard.model.response.CommentResponse
 import com.study.dongamboard.model.response.PostResponse
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PostActivity : AppCompatActivity() {
 
+    private val utils: Utils by lazy {
+        Utils(this)
+    }
+
     private lateinit var post: PostResponse
-    private lateinit var category: BoardCategoryType
+    private lateinit var category: BoardCategory
     private lateinit var commentAdapter: CommentAdapter
     private lateinit var lvCmt: ListView
     private lateinit var commentList: ArrayList<CommentResponse>
@@ -53,7 +57,7 @@ class PostActivity : AppCompatActivity() {
         }
 
         post = intent.getSerializableExtra("postData") as PostResponse
-        category = intent.getSerializableExtra("category") as BoardCategoryType
+        category = intent.getSerializableExtra("category") as BoardCategory
         reloadPost()
 
         lvCmt = findViewById<ListView>(R.id.lvCmt)
@@ -78,7 +82,7 @@ class PostActivity : AppCompatActivity() {
                     readCommentsByScroll()
                     lvCmt.scrollY = lastY
                 }
-                Log.d("scrollY", lvCmt.scrollY.toString())
+                utils.logD("scrollY: ${lvCmt.scrollY.toString()}")
             }
 
             override fun onScroll(p0: AbsListView?, p1: Int, p2: Int, p3: Int) {
@@ -101,7 +105,7 @@ class PostActivity : AppCompatActivity() {
 
         val ivPostLike = findViewById<ImageView>(R.id.ivPostLike)
         ivPostLike.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.Main).launch {
                 APIObject.getRetrofitAPIService.clickPostLike(post.id)
                 reloadPost()
             }
@@ -130,9 +134,13 @@ class PostActivity : AppCompatActivity() {
                 tvCmtCnt.text = "[댓글 " + "0" + "]"
                 tvPostContent.text = post.content
                 tvPostCategory.text = category.toString()
+
+                utils.logD(statusCode)
             }.onError {
-                Log.d("statusCode", statusCode.toString())
-                Log.d("error", errorBody.toString())
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }
@@ -142,17 +150,19 @@ class PostActivity : AppCompatActivity() {
             val response = APIObject.getRetrofitAPIService.getAllComment(post.id, displayCommentSize, 0, lastCommentId)
             response.onSuccess {
                 commentList.addAll(data as ArrayList<CommentResponse>)
-                Log.d("commentList", commentList.toString())
                 commentAdapter = CommentAdapter(applicationContext, R.layout.comment_adapter_view,
                     commentList as MutableList<CommentResponse>
                 )
                 commentAdapter.notifyDataSetChanged()
                 lvCmt.adapter = commentAdapter
+
+                utils.logD("commentList: $commentList")
+                utils.logD(statusCode)
             }.onError {
-                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
-                // TODO: status code에 따른 처리
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
             }.onFailure {
-                Log.e("failed",  this)
+                utils.logE(this)
             }
         }
     }
@@ -164,11 +174,13 @@ class PostActivity : AppCompatActivity() {
                 findViewById<EditText>(R.id.etCmtCnt).setText("")
                 hideKeyboard(applicationContext as PostActivity)
                 readCommentsByScroll()
+
+                utils.logD(statusCode)
             }.onError {
-                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
-                // TODO: status code에 따른 처리
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
             }.onFailure {
-                Log.e("failed",  this)
+                utils.logE(this)
             }
         }
     }
@@ -202,13 +214,14 @@ class PostActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val response = APIObject.getRetrofitAPIService.deletePost(post.id)
                     response.onSuccess {
-                        finish()
                         // TODO: 해당 포스트의 댓글 삭제 요청 추가
+                        utils.logD(statusCode)
+                        finish()
                     }.onError {
-                        Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
-                        // TODO: status code에 따른 처리
+                        val errorMsg = utils.logE(statusCode)
+                        Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
                     }.onFailure {
-                        Log.e("failed",  this)
+                        utils.logE(this)
                     }
                 }
             }

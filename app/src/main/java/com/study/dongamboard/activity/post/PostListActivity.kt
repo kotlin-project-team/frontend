@@ -2,10 +2,10 @@ package com.study.dongamboard.activity.post
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lakue.pagingbutton.LakuePagingButton
@@ -16,15 +16,20 @@ import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.api.APIObject
+import com.study.dongamboard.api.Utils
 import com.study.dongamboard.model.response.PostResponse
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PostListActivity : AppCompatActivity() {
 
-    private lateinit var category: BoardCategoryType
+    private val utils: Utils by lazy {
+        Utils(this)
+    }
+
+    private lateinit var category: BoardCategory
     private lateinit var postAdapter: PostAdapter
     private lateinit var lvPost: ListView
     private lateinit var postList: ArrayList<PostResponse>
@@ -37,7 +42,7 @@ class PostListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
 
-        category = intent.getSerializableExtra("postCategory") as BoardCategoryType
+        category = intent.getSerializableExtra("postCategory") as BoardCategory
         val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
         tvPostListCategory.text = category.toString()
 
@@ -79,15 +84,19 @@ class PostListActivity : AppCompatActivity() {
                 } else {
                     maxPageSize = data.postCount / displayPageItemSize
                 }
-                Log.d("size", data.postCount.toString() + " " + displayPageItemSize)
-                Log.d("maxPageSize", maxPageSize.toString())
                 if (data.postCount % displayPageItemSize > 0) {
                     maxPageSize++
                 }
                 paging()
+
+                utils.logD("size" + data.postCount.toString() + " " + displayPageItemSize)
+                utils.logD("maxPageSize: $maxPageSize")
+                utils.logD(statusCode)
             }.onError {
-                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
-                // TODO: status code에 따른 처리
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }
@@ -102,11 +111,13 @@ class PostListActivity : AppCompatActivity() {
                 )
                 postAdapter.notifyDataSetChanged()
                 lvPost.adapter = postAdapter
+
+                utils.logD(statusCode)
             }.onError {
-                Log.e("statusCode", statusCode.code.toString() + " " + statusCode.toString())
-                // TODO: status code에 따른 처리
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
             }.onFailure {
-                Log.e("failed",  this)
+                utils.logE(this)
             }
         }
     }

@@ -15,7 +15,7 @@ import com.study.dongamboard.model.response.CommentResponse
 import com.study.dongamboard.model.response.MyInformationResponse
 import com.study.dongamboard.model.response.NoticeResponse
 import com.study.dongamboard.model.response.SignInResponse
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -29,7 +29,7 @@ interface APIService {
     suspend fun getAllPost(
         @Query(value = "size") size: Int,
         @Query(value = "page") page: Int,
-        @Query(value = "category") category: BoardCategoryType): ApiResponse<AllPostByCategoryResponse>
+        @Query(value = "category") category: BoardCategory): ApiResponse<AllPostByCategoryResponse>
 
     @GET("/api/post/{postId}")
     suspend fun getPostById(@Path(value = "postId") id: Long): ApiResponse<PostResponse>

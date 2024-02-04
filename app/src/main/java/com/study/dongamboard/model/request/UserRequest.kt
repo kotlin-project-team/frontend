@@ -2,7 +2,7 @@ package com.study.dongamboard.model.request
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.study.dongamboard.type.UserRoleType
+import com.study.dongamboard.type.UserRole
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
@@ -20,5 +20,5 @@ data class UserRequest (
     val deviceToken: String,
 
     @field:Json(name = "role")
-    val role: UserRoleType,
+    val role: UserRole,
 ) : Serializable
