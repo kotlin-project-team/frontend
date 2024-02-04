@@ -13,7 +13,7 @@ import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.model.request.UpdateNicknameRequest
 import com.study.dongamboard.model.request.UpdatePasswordRequest
-import com.study.dongamboard.type.ResponseStatusType
+import com.study.dongamboard.type.ResponseStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

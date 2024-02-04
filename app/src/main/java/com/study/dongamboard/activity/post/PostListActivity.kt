@@ -17,7 +17,7 @@ import com.study.dongamboard.R
 import com.study.dongamboard.adapter.PostAdapter
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.model.response.PostResponse
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,7 +37,7 @@ class PostListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_postlist)
 
-        category = intent.getSerializableExtra("postCategory") as BoardCategoryType
+        category = intent.getSerializableExtra("postCategory") as BoardCategory
         val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
         tvPostListCategory.text = category.toString()
 

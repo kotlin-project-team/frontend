@@ -26,7 +26,7 @@ import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.model.request.CommentRequest
 import com.study.dongamboard.model.response.CommentResponse
 import com.study.dongamboard.model.response.PostResponse
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 class PostActivity : AppCompatActivity() {
 
     private lateinit var post: PostResponse
-    private lateinit var category: BoardCategoryType
+    private lateinit var category: BoardCategory
     private lateinit var commentAdapter: CommentAdapter
     private lateinit var lvCmt: ListView
     private lateinit var commentList: ArrayList<CommentResponse>
@@ -53,7 +53,7 @@ class PostActivity : AppCompatActivity() {
         }
 
         post = intent.getSerializableExtra("postData") as PostResponse
-        category = intent.getSerializableExtra("category") as BoardCategoryType
+        category = intent.getSerializableExtra("category") as BoardCategory
         reloadPost()
 
         lvCmt = findViewById<ListView>(R.id.lvCmt)

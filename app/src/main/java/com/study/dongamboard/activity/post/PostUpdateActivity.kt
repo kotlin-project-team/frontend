@@ -12,7 +12,7 @@ import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.model.response.PostResponse
 import com.study.dongamboard.model.request.PostRequest
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,14 +20,14 @@ import kotlinx.coroutines.launch
 class PostUpdateActivity : AppCompatActivity() {
 
     private lateinit var post: PostResponse
-    private lateinit var category: BoardCategoryType
+    private lateinit var category: BoardCategory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
 
         post = intent.getSerializableExtra("postData") as PostResponse
-        category = intent.getSerializableExtra("category") as BoardCategoryType
+        category = intent.getSerializableExtra("category") as BoardCategory
 
         val etPostCreateTitle = findViewById<EditText>(R.id.etPostCreateTitle)
         val etPostCreateContent = findViewById<EditText>(R.id.etPostCreateContent)

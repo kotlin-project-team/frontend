@@ -12,7 +12,7 @@ import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.model.request.UserRequest
-import com.study.dongamboard.type.UserRoleType
+import com.study.dongamboard.type.UserRole
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +36,7 @@ class SignUpActivity : AppCompatActivity() {
                     etPassword.text.toString(),
                     etNickname.text.toString(),
                     deviceId,
-                    UserRoleType.USER
+                    UserRole.USER
                 )
                 //TODO: 입력값 Filtering
 

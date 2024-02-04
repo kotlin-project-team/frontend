@@ -15,7 +15,7 @@ import com.study.dongamboard.activity.notice.NoticeListActivity
 import com.study.dongamboard.activity.post.BestActivity
 import com.study.dongamboard.activity.post.PostListActivity
 import com.study.dongamboard.activity.user.UserActivity
-import com.study.dongamboard.type.BoardCategoryType
+import com.study.dongamboard.type.BoardCategory
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,14 +52,14 @@ class MainActivity : AppCompatActivity() {
         val btnBoardGeneral = findViewById<Button>(R.id.btnBoardGeneral)
         btnBoardGeneral.setOnClickListener {
             val intent = Intent(this, PostListActivity::class.java)
-            intent.putExtra("postCategory", BoardCategoryType.자유게시판)
+            intent.putExtra("postCategory", BoardCategory.자유게시판)
             startActivity(intent)
         }
 
         val btnBoardMarket = findViewById<Button>(R.id.btnBoardMarket)
         btnBoardMarket.setOnClickListener {
             val intent = Intent(this, PostListActivity::class.java)
-            intent.putExtra("postCategory", BoardCategoryType.장터게시판)
+            intent.putExtra("postCategory", BoardCategory.장터게시판)
             startActivity(intent)
         }
 
