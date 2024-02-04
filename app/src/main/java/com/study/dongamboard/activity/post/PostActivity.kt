@@ -82,7 +82,7 @@ class PostActivity : AppCompatActivity() {
                     readCommentsByScroll()
                     lvCmt.scrollY = lastY
                 }
-                utils.logD("scrollY: " + lvCmt.scrollY.toString())
+                utils.logD("scrollY: ${lvCmt.scrollY.toString()}")
             }
 
             override fun onScroll(p0: AbsListView?, p1: Int, p2: Int, p3: Int) {
