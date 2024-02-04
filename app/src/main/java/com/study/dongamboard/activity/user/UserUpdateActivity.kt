@@ -65,7 +65,7 @@ class UserUpdateActivity : AppCompatActivity() {
             }.onError {
                 Log.d("statusCode", statusCode.toString())
                 Log.d("error", errorBody.toString())
-                if (statusCode.code == ResponseStatusType.BAD_REQUEST.code) {
+                if (statusCode.code == ResponseStatus.BAD_REQUEST.code) {
                     Toast.makeText(applicationContext, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                     etOldPassword.setText("")
                     etNewPassword.setText("")
