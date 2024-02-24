@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainFragment"
+        android:title="홈"
+        android:icon="@drawable/menu"/>
+
+    <item
+        android:id="@+id/noticeFragment"
+        android:title="공지사항"
+        android:icon="@drawable/commercial"/>
+
+    <item
+        android:id="@+id/postFragment"
+        android:title="게시판"
+        android:icon="@drawable/rect"/>
+
+    <item
+        android:id="@+id/userFragment"
+        android:title="마이페이지"
+        android:icon="@drawable/spa_flower"/>
+</menu>
