@@ -68,14 +68,18 @@ class NoticeListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllNotice(0, 0)
             response.onSuccess {
-                maxPageSize = data.size / displayPageItemSize
-                if (data.isNotEmpty() && data.size % displayPageItemSize > 0) {
-                    maxPageSize++
-                    paging()
+                if (data.result.isEmpty()) {
+                    maxPageSize = 1
+                } else {
+                    maxPageSize = data.result.size / displayPageItemSize
                 }
+                if (data.result.size % displayPageItemSize > 0) {
+                    maxPageSize++
+                }
+                paging()
 
                 utils.logD(statusCode)
-                utils.logD("size" + data.size.toString() + " " + displayPageItemSize)
+                utils.logD("size" + data.result.size.toString() + " " + displayPageItemSize)
                 utils.logD("maxPageSize: $maxPageSize")
             }.onError {
                 val errorMsg = utils.logE(statusCode)
@@ -90,7 +94,7 @@ class NoticeListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllNotice(displayPageItemSize, nowPage - 1)
             response.onSuccess {
-                noticeList = data as ArrayList<NoticeResponse>
+                noticeList = data.result as ArrayList<NoticeResponse>
                 noticeAdapter = NoticeAdapter(applicationContext, R.layout.notice_adapter_view,
                     noticeList as MutableList<NoticeResponse>
                 )
