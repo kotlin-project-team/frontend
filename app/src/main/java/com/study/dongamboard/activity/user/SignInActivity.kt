@@ -3,7 +3,6 @@ package com.study.dongamboard.activity.user
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,6 +14,7 @@ import com.study.dongamboard.R
 import com.study.dongamboard.activity.MainActivity.Companion.tokenDataStore
 import com.study.dongamboard.api.APIObject
 import com.study.dongamboard.api.TokenAuthenticator
+import com.study.dongamboard.api.Utils
 import com.study.dongamboard.model.request.SignInRequest
 import com.study.dongamboard.type.ResponseStatus
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +26,10 @@ class SignInActivity : AppCompatActivity() {
     companion object{
         lateinit var signInActivity: SignInActivity
         fun isInitialized() = ::signInActivity.isInitialized
+    }
+
+    private val utils: Utils by lazy {
+        Utils(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,14 +49,14 @@ class SignInActivity : AppCompatActivity() {
                 val response = APIObject.getRetrofitAPIService.signIn(signInReq)
                 response.onSuccess {
                     CoroutineScope(Dispatchers.IO).launch {
-                        saveAccessToken(data.accessToken)
-                        saveRefreshToken(data.refreshToken)
+                        saveAccessToken(data.result.accessToken)
+                        saveRefreshToken(data.result.refreshToken)
                     }
                     val intent = Intent(applicationContext, UserActivity::class.java)
                     startActivity(intent)
                 }.onError {
-                    Log.d("statusCode", statusCode.toString())
-                    Log.d("error", errorBody.toString())
+                    utils.logD(statusCode.toString())
+                    utils.logD(errorBody.toString())
                     if (statusCode.code == ResponseStatus.BAD_REQUEST.code) {
                         Toast.makeText(applicationContext, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                         etSignInPwd.setText("")

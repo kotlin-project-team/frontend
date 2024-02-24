@@ -1,22 +1,27 @@
 package com.study.dongamboard.activity.user
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.activity.user.SignInActivity.Companion.signInActivity
 import com.study.dongamboard.api.APIObject
+import com.study.dongamboard.api.Utils
 import com.study.dongamboard.model.response.MyInformationResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserActivity : AppCompatActivity() {
+
+    private val utils: Utils by lazy {
+        Utils(this)
+    }
 
     private lateinit var myInfo: MyInformationResponse
 
@@ -55,13 +60,16 @@ class UserActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getMyInformation()
             response.onSuccess {
-                myInfo = data
+                myInfo = data.result
                 tvPostTitle.text = myInfo.studentId
                 tvPostContent.text = myInfo.nickname
-                Log.d("loadMyInfo", myInfo.nickname)
+
+                utils.logD(statusCode)
             }.onError {
-                Log.d("statusCode", statusCode.toString())
-                Log.d("error", errorBody.toString())
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }
@@ -70,10 +78,13 @@ class UserActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.deleteUser()
             response.onSuccess {
+                utils.logD(statusCode)
                 finish()
             }.onError {
-                Log.d("statusCode", statusCode.toString())
-                Log.d("error", errorBody.toString())
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }

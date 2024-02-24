@@ -48,7 +48,7 @@ class PostCreateActivity : AppCompatActivity() {
                     finish()
                 }.onError {
                     val errorMsg = utils.logE(statusCode)
-                    Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+                    runOnUiThread { Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show() }
                 }.onFailure {
                     utils.logE(this)
                 }

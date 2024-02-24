@@ -128,7 +128,7 @@ class PostActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getPostById(post.id)
             response.onSuccess {
-                post = data
+                post = data.result
                 tvPostTitle.text = post.title
                 tvLikes.text = "[솜솜픽 " + post.likes.toString() + "]"
                 tvCmtCnt.text = "[댓글 " + "0" + "]"
@@ -194,7 +194,7 @@ class PostActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getMyInformation()
             response.onSuccess {
-                if (data.studentId == post.user.studentId) {
+                if (data.result.studentId == post.user.studentId) {
                     menuInflater.inflate(R.menu.menu_post, menu)
                 }
             }
@@ -214,7 +214,6 @@ class PostActivity : AppCompatActivity() {
                 CoroutineScope(Dispatchers.IO).launch {
                     val response = APIObject.getRetrofitAPIService.deletePost(post.id)
                     response.onSuccess {
-                        // TODO: 해당 포스트의 댓글 삭제 요청 추가
                         utils.logD(statusCode)
                         finish()
                     }.onError {

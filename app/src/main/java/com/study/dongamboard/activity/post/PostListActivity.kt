@@ -46,7 +46,7 @@ class PostListActivity : AppCompatActivity() {
         val tvPostListCategory = findViewById<TextView>(R.id.tvPostListCategory)
         tvPostListCategory.text = category.toString()
 
-        lvPost = findViewById<ListView>(R.id.lvPost)
+        lvPost = findViewById<ListView>(R.id.lvPostActiList)
         postList = arrayListOf<PostResponse>()
 
         setPager()
@@ -79,17 +79,17 @@ class PostListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllPost(0, 0, category)
             response.onSuccess {
-                if (data.postCount == 0) {
+                if (data.result.postCount == 0) {
                     maxPageSize = 1
                 } else {
-                    maxPageSize = data.postCount / displayPageItemSize
+                    maxPageSize = data.result.postCount / displayPageItemSize
                 }
-                if (data.postCount % displayPageItemSize > 0) {
+                if (data.result.postCount % displayPageItemSize > 0) {
                     maxPageSize++
                 }
                 paging()
 
-                utils.logD("size" + data.postCount.toString() + " " + displayPageItemSize)
+                utils.logD("size" + data.result.postCount.toString() + " " + displayPageItemSize)
                 utils.logD("maxPageSize: $maxPageSize")
                 utils.logD(statusCode)
             }.onError {
@@ -105,7 +105,7 @@ class PostListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getAllPost(displayPageItemSize, nowPage - 1, category)
             response.onSuccess {
-                postList = data.posts as ArrayList<PostResponse>
+                postList = data.result.posts as ArrayList<PostResponse>
                 postAdapter = PostAdapter(applicationContext, R.layout.post_adapter_view,
                     postList as MutableList<PostResponse>
                 )
