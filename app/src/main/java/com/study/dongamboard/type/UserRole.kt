@@ -1,6 +1,6 @@
 package com.study.dongamboard.type
 
 enum class UserRole {
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }

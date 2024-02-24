@@ -41,7 +41,7 @@ class Utils(context: Context) {
             ResponseStatus.NOT_FOUND.code -> errorMsg = ResponseStatus.NOT_FOUND.message
             ResponseStatus.CONFLICT.code -> errorMsg = ResponseStatus.CONFLICT.message
             ResponseStatus.INTERNET_SERVER_ERROR.code -> errorMsg = ResponseStatus.INTERNET_SERVER_ERROR.message
-            else -> errorMsg = "알 수 없는 오류"
+            else -> errorMsg = statusCode.toString()
         }
         if (DEBUG) {
             Log.e(TAG, "$statusCode $errorMsg")
