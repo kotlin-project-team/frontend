@@ -7,7 +7,7 @@ import java.io.Serializable
 @JsonClass(generateAdapter = true)
 data class NoticeResponse(
     @field:Json(name = "id")
-    val id: Int,
+    val id: Long,
 
     @field:Json(name = "title")
     val title: String,

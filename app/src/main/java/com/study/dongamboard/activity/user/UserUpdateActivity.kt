@@ -1,16 +1,17 @@
 package com.study.dongamboard.activity.user
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.skydoves.sandwich.onError
+import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
 import com.study.dongamboard.api.APIObject
+import com.study.dongamboard.api.Utils
 import com.study.dongamboard.model.request.UpdateNicknameRequest
 import com.study.dongamboard.model.request.UpdatePasswordRequest
 import com.study.dongamboard.type.ResponseStatus
@@ -19,6 +20,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserUpdateActivity : AppCompatActivity() {
+
+    private val utils: Utils by lazy {
+        Utils(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +48,15 @@ class UserUpdateActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             val response = APIObject.getRetrofitAPIService.getMyInformation()
             response.onSuccess {
-                tvStuId.text = data.studentId
-                etNewNickname.setText(data.nickname)
+                tvStuId.text = data.result.studentId
+                etNewNickname.setText(data.result.nickname)
+
+                utils.logD(statusCode)
             }.onError {
-                Log.d("statusCode", statusCode.toString())
-                Log.d("error", errorBody.toString())
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }
@@ -63,13 +72,27 @@ class UserUpdateActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
             }.onError {
-                Log.d("statusCode", statusCode.toString())
-                Log.d("error", errorBody.toString())
+                utils.logE(statusCode)
                 if (statusCode.code == ResponseStatus.BAD_REQUEST.code) {
                     Toast.makeText(applicationContext, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                     etOldPassword.setText("")
                     etNewPassword.setText("")
                 }
+            }
+
+            response.onSuccess {
+                Toast.makeText(applicationContext, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                utils.logD(statusCode)
+                finish()
+            }.onError {
+                utils.logE(statusCode)
+                if (statusCode.code == ResponseStatus.BAD_REQUEST.code) {
+                    Toast.makeText(applicationContext, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    etOldPassword.setText("")
+                    etNewPassword.setText("")
+                }
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }
@@ -84,8 +107,17 @@ class UserUpdateActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "닉네임이 변경되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
             }.onError {
-                Log.d("statusCode", statusCode.toString())
-                Log.d("error", errorBody.toString())
+                utils.logD(statusCode.toString())
+                utils.logD(errorBody.toString())
+            }
+
+            response.onSuccess {
+                utils.logD(statusCode)
+            }.onError {
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
             }
         }
     }

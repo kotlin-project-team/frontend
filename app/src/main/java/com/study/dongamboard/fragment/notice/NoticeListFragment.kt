@@ -1,67 +1,75 @@
-package com.study.dongamboard.activity.notice
+package com.study.dongamboard.fragment.notice
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.ListView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.lakue.pagingbutton.LakuePagingButton
+import androidx.fragment.app.Fragment
 import com.lakue.pagingbutton.OnPageSelectListener
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.onSuccess
 import com.study.dongamboard.R
+import com.study.dongamboard.activity.NaviActivity
+import com.study.dongamboard.activity.notice.NoticeActivity
+import com.study.dongamboard.activity.notice.NoticeCreateActivity
 import com.study.dongamboard.adapter.NoticeAdapter
 import com.study.dongamboard.api.APIObject
-import com.study.dongamboard.api.Utils
+import com.study.dongamboard.databinding.FragmentNoticeListBinding
 import com.study.dongamboard.model.response.NoticeResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoticeListActivity : AppCompatActivity() {
 
-    private val utils: Utils by lazy {
-        Utils(this)
-    }
+class NoticeListFragment : Fragment() {
+
+    private lateinit var binding: FragmentNoticeListBinding
 
     private lateinit var noticeAdapter: NoticeAdapter
-    private lateinit var lvNotice: ListView
     private lateinit var noticeList : ArrayList<NoticeResponse>
-
     private val displayPageItemSize = 6
-    private var maxPageSize = 5       // TODO: notice 개수 처리
+    private var maxPageSize = 1
     private var nowPage = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_noticelist)
+        arguments?.let {
+        }
+    }
 
-        lvNotice = findViewById<ListView>(R.id.lvNotice)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentNoticeListBinding.inflate(inflater, container, false)
+
         noticeList = arrayListOf<NoticeResponse>()
 
         setPager()
         readAllNoticesByPage()
 
-        lvNotice.setOnItemClickListener { adapterView, view, i, l ->
-            val intent = Intent(this, NoticeActivity::class.java)
+        binding.lvNotice.setOnItemClickListener { adapterView, view, i, l ->
+            val intent = Intent(NaviActivity.applicationContext(), NoticeActivity::class.java)
             intent.putExtra("noticeData", noticeList[i])
             startActivity(intent)
         }
 
-        val ivNoticeCreate = findViewById<ImageView>(R.id.ivNoticeCreate)
-        ivNoticeCreate.setOnClickListener {
-            val intent = Intent(this, NoticeCreateActivity::class.java)
+        binding.ivNoticeCreate.setOnClickListener {
+            val intent = Intent(NaviActivity.applicationContext(), NoticeCreateActivity::class.java)
             startActivity(intent)
         }
 
-        var swipe = findViewById<SwipeRefreshLayout>(R.id.swipeNoticelistLayout)
+        var swipe = binding.swipeNoticelistLayout
         swipe.setOnRefreshListener {
             readAllNoticesByPage()
             swipe.isRefreshing = false
         }
+
+        return binding.root
     }
 
     private fun setPager() {
@@ -78,14 +86,14 @@ class NoticeListActivity : AppCompatActivity() {
                 }
                 paging()
 
-                utils.logD(statusCode)
-                utils.logD("size" + data.result.size.toString() + " " + displayPageItemSize)
-                utils.logD("maxPageSize: $maxPageSize")
+                NaviActivity.utils.logD(statusCode)
+                NaviActivity.utils.logD("size" + data.result.size.toString() + " " + displayPageItemSize)
+                NaviActivity.utils.logD("maxPageSize: $maxPageSize")
             }.onError {
-                val errorMsg = utils.logE(statusCode)
-                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+                val errorMsg = NaviActivity.utils.logE(statusCode)
+                Toast.makeText(NaviActivity.applicationContext(), errorMsg, Toast.LENGTH_SHORT).show()
             }.onFailure {
-                utils.logE(this)
+                NaviActivity.utils.logE(this)
             }
         }
     }
@@ -95,24 +103,24 @@ class NoticeListActivity : AppCompatActivity() {
             val response = APIObject.getRetrofitAPIService.getAllNotice(displayPageItemSize, nowPage - 1)
             response.onSuccess {
                 noticeList = data.result as ArrayList<NoticeResponse>
-                noticeAdapter = NoticeAdapter(applicationContext, R.layout.notice_adapter_view,
+                noticeAdapter = NoticeAdapter(NaviActivity.applicationContext(), R.layout.notice_adapter_view,
                     noticeList as MutableList<NoticeResponse>
                 )
                 noticeAdapter.notifyDataSetChanged()
-                lvNotice.adapter = noticeAdapter
+                binding.lvNotice.adapter = noticeAdapter
 
-                utils.logD(statusCode)
+                NaviActivity.utils.logD(statusCode)
             }.onError {
-                val errorMsg = utils.logE(statusCode)
-                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+                val errorMsg = NaviActivity.utils.logE(statusCode)
+                Toast.makeText(NaviActivity.applicationContext(), errorMsg, Toast.LENGTH_SHORT).show()
             }.onFailure {
-                utils.logE(this)
+                NaviActivity.utils.logE(this)
             }
         }
     }
 
     private fun paging() {
-        val btnLpbPager = findViewById<LakuePagingButton>(R.id.btnLpbPager)
+        val btnLpbPager = binding.btnLpbPager
         var displayPageSize = 5
 
         if (maxPageSize < 5) {
@@ -143,6 +151,16 @@ class NoticeListActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        setPager()
         readAllNoticesByPage()
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            NoticeListFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
     }
 }

@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5D1EE"
-    tools:context=".activity.MainActivity">
+    tools:context=".fragment.MainFragment">
 
-    <RelativeLayout
-        android:id="@+id/android_sma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/android_sma"
-        android:clipToOutline="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,41 +21,22 @@
                 android:layout_height="55dp"
                 android:background="#7D233F"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/menu" />
 
             <TextView
                 android:id="@+id/textMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="SomSom's Talk"
+                android:text="D    O    N    G    A    M"
                 android:textColor="#FBFBFB"
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/ivUserPage"
-                android:layout_width="38dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/som1" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
@@ -139,7 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="29dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="136dp"
+                    android:layout_marginTop="144dp"
                     android:gravity="top"
                     android:text="실시간 솜솜톡"
                     android:textAppearance="@style/some_id"
@@ -152,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="136dp"
+                    android:layout_marginTop="140dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView2"
                     app:srcCompat="@drawable/rect" />
@@ -160,8 +136,8 @@
                 <ListView
                     android:layout_width="295dp"
                     android:layout_height="118dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="96dp"
                     app:layout_constraintStart_toEndOf="@+id/imageView3"
                     app:layout_constraintTop_toBottomOf="@+id/textTalk" />
 
@@ -169,9 +145,9 @@
                     android:id="@+id/btnBoardGeneral"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="55dp"
-                    android:layout_marginTop="132dp"
-                    android:backgroundTint="#7D233F"
+                    android:layout_marginStart="52dp"
+                    android:layout_marginTop="28dp"
+                    android:backgroundTint="@color/dwu_purple"
                     android:text="자유게시판"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textTalk" />
@@ -181,12 +157,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
-                    android:layout_marginTop="132dp"
-                    android:backgroundTint="#7D233F"
+                    android:layout_marginTop="28dp"
+                    android:backgroundTint="@color/dwu_purple"
                     android:text="장터게시판"
                     app:layout_constraintStart_toEndOf="@+id/btnBoardGeneral"
                     app:layout_constraintTop_toBottomOf="@+id/textTalk" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </RelativeLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

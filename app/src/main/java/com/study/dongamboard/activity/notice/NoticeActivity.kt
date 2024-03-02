@@ -37,12 +37,37 @@ class NoticeActivity : AppCompatActivity() {
         }
 
         notice = intent.getSerializableExtra("noticeData") as NoticeResponse
+        reloadNotice()
 
         val tvNoticeTitle = findViewById<TextView>(R.id.tvNoticeTitle)
         val tvNoticeContent = findViewById<TextView>(R.id.tvNoticeContent)
 
         tvNoticeTitle.text = notice.title
         tvNoticeContent.text = notice.content
+    }
+
+    private fun reloadNotice() {
+        val tvNoticeTitle = findViewById<TextView>(R.id.tvNoticeTitle)
+        val tvNoticeContent = findViewById<TextView>(R.id.tvNoticeContent)
+
+        tvNoticeTitle.text = notice.title
+        tvNoticeContent.text = notice.content
+
+        CoroutineScope(Dispatchers.Main).launch {
+            val response = APIObject.getRetrofitAPIService.getNoticeById(notice.id)
+            response.onSuccess {
+                notice = data
+                tvNoticeTitle.text = notice.title
+                tvNoticeContent.text = notice.content
+
+                utils.logD(statusCode)
+            }.onError {
+                val errorMsg = utils.logE(statusCode)
+                Toast.makeText(applicationContext, errorMsg, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                utils.logE(this)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,7 +82,6 @@ class NoticeActivity : AppCompatActivity() {
                     val intent = Intent(applicationContext, NoticeUpdateActivity::class.java)
                     intent.putExtra("noticeData", notice)
                     startActivity(intent)
-                    // TODO: get notice by id 기능 추가 시 reload Notice
                 }
             }
             R.id.miDeleteNotice ->{
@@ -77,5 +101,10 @@ class NoticeActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        reloadNotice()
     }
 }

@@ -15,18 +15,15 @@
         android:theme="@style/Theme.Dongamboard"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <activity
-            android:name=".activity.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Design.NoActionBar">
+            android:name=".activity.NaviActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.user.UserActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
@@ -39,7 +36,6 @@
         <activity
             android:name=".activity.user.SignUpActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
-
         <activity
             android:name=".activity.notice.NoticeActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
@@ -52,11 +48,9 @@
         <activity
             android:name=".activity.notice.NoticeUpdateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
-
         <activity
             android:name=".activity.post.BestActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
-
         <activity
             android:name=".activity.post.PostActivity"
             android:theme="@style/Theme.Design.NoActionBar"
@@ -71,4 +65,5 @@
             android:name=".activity.post.PostUpdateActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
     </application>
+
 </manifest>

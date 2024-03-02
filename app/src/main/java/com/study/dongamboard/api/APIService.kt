@@ -11,6 +11,7 @@ import com.study.dongamboard.model.request.UpdateNicknameRequest
 import com.study.dongamboard.model.request.UpdatePasswordRequest
 import com.study.dongamboard.model.request.UserRequest
 import com.study.dongamboard.model.response.AllPostByCategoryResponse
+import com.study.dongamboard.model.response.BaseResponse
 import com.study.dongamboard.model.response.CommentResponse
 import com.study.dongamboard.model.response.MyInformationResponse
 import com.study.dongamboard.model.response.NoticeResponse
@@ -29,10 +30,10 @@ interface APIService {
     suspend fun getAllPost(
         @Query(value = "size") size: Int,
         @Query(value = "page") page: Int,
-        @Query(value = "category") category: BoardCategory): ApiResponse<AllPostByCategoryResponse>
+        @Query(value = "category") category: BoardCategory): ApiResponse<BaseResponse<AllPostByCategoryResponse>>
 
     @GET("/api/post/{postId}")
-    suspend fun getPostById(@Path(value = "postId") id: Long): ApiResponse<PostResponse>
+    suspend fun getPostById(@Path(value = "postId") id: Long): ApiResponse<BaseResponse<PostResponse>>
 
     @POST("/api/post")
     suspend fun createPost(@Body postRequest: PostRequest): ApiResponse<Unit>
@@ -61,25 +62,28 @@ interface APIService {
     @GET("/api/notice")
     suspend fun getAllNotice(
         @Query(value = "size") size: Int,
-        @Query(value = "page") page: Int): ApiResponse<List<NoticeResponse>>
+        @Query(value = "page") page: Int): ApiResponse<BaseResponse<List<NoticeResponse>>>
+
+    @GET("/api/notice/{noticeId}")
+    suspend fun getNoticeById(@Path(value = "noticeId") id: Long): ApiResponse<NoticeResponse>
 
     @POST("/api/notice")
     suspend fun createNotice(@Body noticeRequest: NoticeRequest): ApiResponse<Unit>
 
     @PATCH("/api/notice/{noticeId}")
-    suspend fun updateNotice(@Path(value = "noticeId") id: Int, @Body noticeRequest: NoticeRequest): ApiResponse<Unit>
+    suspend fun updateNotice(@Path(value = "noticeId") id: Long, @Body noticeRequest: NoticeRequest): ApiResponse<Unit>
 
     @DELETE("/api/notice/{noticeId}")
-    suspend fun deleteNotice(@Path(value = "noticeId") id: Int): ApiResponse<Unit>
+    suspend fun deleteNotice(@Path(value = "noticeId") id: Long): ApiResponse<Unit>
 
     @GET("/api/user")
-    suspend fun getMyInformation(): ApiResponse<MyInformationResponse>
+    suspend fun getMyInformation(): ApiResponse<BaseResponse<MyInformationResponse>>
 
     @POST("/api/user/sign-up")
     suspend fun createUser(@Body userRequest: UserRequest): ApiResponse<Unit>
 
     @POST("/api/user/sign-in")
-    suspend fun signIn(@Body signInRequest: SignInRequest): ApiResponse<SignInResponse>
+    suspend fun signIn(@Body signInRequest: SignInRequest): ApiResponse<BaseResponse<SignInResponse>>
 
     @POST("/api/user/my-page/password")
     suspend fun checkPasswordForMyPage(@Body checkPasswordForMyPageRequest: CheckPasswordForMyPageRequest): ApiResponse<Unit>
